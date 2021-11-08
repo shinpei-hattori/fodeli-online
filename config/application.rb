@@ -14,6 +14,7 @@ module FodeliOnline
     config.generators do |g|
       g.assets false          # CSS, JavaScriptファイルは生成しない
       g.test_framework false  # testファイルは生成しない
+      #プルリクエストのテスト
     end
   end
 end
