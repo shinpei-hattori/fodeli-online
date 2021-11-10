@@ -1,2 +1,22 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="container mt-5">
+  <h1>Fodeli Onlineとは？</h1>
+  <p class="text-center mb-5">フードデリバリー配達員が仕事に関する情報交換や、同業種の繋がり作ることができるサービスです。</p>
+  <div class="row  mb-5">
+    <p class="col-6 d-flex align-items-center">・仕事をしてる時、「注文来ないな〜。稼いでる人はどんな風に仕事しているんだろう？」<br>
+      ・もっと同業種の知り合いが欲しいな〜 一人でずっと仕事してても、寂しくなってくる....<br>
+      こんな風に思ったことはありませんか？
+    ​</p>
+    <%=image_tag("derivari_man.jpg", :alt => "",class: "col-6 border rounded shadow p-0")%>
+  </div>
+  <div class="row mb-5">
+    <%=image_tag("chat.jpg", :alt => "",class: "col-6 border rounded shadow p-0")%>
+    <p class="col-6 d-flex align-items-center">フーデリオンラインでは、地域別のオンラインチャットで配達に関する情報交換をすることができます。「 Uber Eats、出前館、フードパンダ、wolt 、menuなど」多くのサービスに対応しています。
+
+    ​</p>
+  </div>
+  <div class="row">
+    <p class="col-6 d-flex align-items-center">オフ会の開いたり参加したりもできます。実際に顔を合わせて交流を深めましょう！
+    ​</p>
+    <%=image_tag("off.jpg", :alt => "",class: "col-6 border rounded shadow p-0")%>
+  </div>
+</div>

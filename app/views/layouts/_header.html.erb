@@ -1,0 +1,12 @@
+<header class="navbar navbar-fixed-top shadow-sm" style="background-color: #e3f2fd;">
+  <div class="container">
+    <%= link_to(image_tag("logo.png", :alt => ""), root_url, id: 'logo') %>
+    <nav class="navbar-expand-lg">
+        <ul class="nav navbar-nav mr-auto">
+          <li class="nav-item"><%= link_to '使い方', about_path ,class: 'nav-link'%></li>
+          <li class="nav-item"><%= link_to '新規登録', about_path ,class: 'nav-link'%></li>
+          <li class="nav-item"><%= link_to 'ログイン', about_path ,class: 'nav-link'%></li>
+        </ul>
+    </nav>
+  </div>
+ </header>

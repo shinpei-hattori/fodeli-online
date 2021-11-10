@@ -1,0 +1,104 @@
+// ミックスイン
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// 全ページ共通
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+// テキストの見栄え
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+// ヘッダー
+.navbar ul {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  .nav-link {
+    color: gray;
+  }
+  .nav-link::after {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: $success;
+    transform: scale(0, 1);
+    transform-origin: center top;
+    transition: transform 0.3s;
+  }
+  .nav-link:hover::after {
+    transform: scale(1, 1);
+  }
+  .nav-link:hover {
+    color: $success;
+  }
+}
+#logo {
+  float: left;
+  img {
+    width: 150px;
+  }
+}
+
+// フッター
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+  small {
+    float: center;
+  }
+}
