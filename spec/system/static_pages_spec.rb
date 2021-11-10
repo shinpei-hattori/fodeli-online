@@ -7,7 +7,7 @@ RSpec.describe "StaticPages", type: :system do
         visit root_path
       end
 
-      it "クックログの文字列が存在することを確認" do
+      it "該当の文字列が存在することを確認" do
         expect(page).to have_content 'Fodeli Onlineとは？'
       end
 
@@ -22,7 +22,7 @@ RSpec.describe "StaticPages", type: :system do
       visit about_path
     end
 
-    it "クックログとは？の文字列が存在することを確認" do
+    it "該当の文字列が存在することを確認" do
       expect(page).to have_content 'Foldeli Onlineの使い方'
     end
 
