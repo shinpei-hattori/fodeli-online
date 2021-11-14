@@ -41,3 +41,6 @@ Style/MutableConstant:
 
 Rails/HelperInstanceVariable:
   Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false

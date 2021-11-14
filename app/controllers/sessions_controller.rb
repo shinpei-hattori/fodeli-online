@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    #ログインしていた場合のみログアウト処理。ブラウザ２つで同時にログアウトした場合に起きるバグ対策。
+    # ログインしていた場合のみログアウト処理。ブラウザ２つで同時にログアウトした場合に起きるバグ対策。
     log_out if logged_in?
     redirect_to root_url
   end

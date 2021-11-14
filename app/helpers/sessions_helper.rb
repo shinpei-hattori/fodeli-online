@@ -1,9 +1,8 @@
 module SessionsHelper
-
   # ユーザーのセッションを永続的にする
   def remember(user)
     user.remember
-    #クッキーにid,rememberトークンを保存
+    # クッキーにid,rememberトークンを保存
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
@@ -14,10 +13,10 @@ module SessionsHelper
 
   # 記憶トークンcookieに対応するユーザーを返す
   def current_user
-    #一時セッションの場合
+    # 一時セッションの場合
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
-    #永続セッションの場合
+    # 永続セッションの場合
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
@@ -33,7 +32,7 @@ module SessionsHelper
 
   # 永続的セッションを破棄する
   def forget(user)
-    #fogetメソッドでDBのremember_digestをnilにする
+    # fogetメソッドでDBのremember_digestをnilにする
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)

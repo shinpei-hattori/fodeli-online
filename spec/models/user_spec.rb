@@ -62,6 +62,4 @@ RSpec.describe User, type: :model do
       expect(user.authenticated?('')).to eq false
     end
   end
-
-
 end

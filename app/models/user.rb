@@ -9,11 +9,14 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
 
-  class << self #クラスメソッド 使用例 User.digest("aaa")
+  class << self # クラスメソッド 使用例 User.digest("aaa")
     # 渡された文字列のハッシュ値を返す
     def digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                    BCrypt::Engine.cost
+      if ActiveModel::SecurePassword.min_cost
+        cost = BCrypt::Engine::MIN_COST
+      else
+        cost = BCrypt::Engine.cost
+      end
       BCrypt::Password.create(string, cost: cost)
     end
 
@@ -25,9 +28,9 @@ class User < ApplicationRecord
 
   # 永続セッションのためにユーザーをデータベースに記憶する
   def remember
-    #新しくトークンを作成。
+    # 新しくトークンを作成。
     self.remember_token = User.new_token
-    #DB上のremember_digestカラムにトークンをハッシュ化した値を保存。
+    # DB上のremember_digestカラムにトークンをハッシュ化した値を保存。
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
