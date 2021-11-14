@@ -27,8 +27,13 @@ RSpec.describe "Sessions", type: :system do
       end
 
       it "ログインフォームが正しく表示される" do
-        expect(page).to have_css 'input#user_email'
-        expect(page).to have_css 'input#user_password'
+        expect(page).to have_css 'input#session_email'
+        expect(page).to have_css 'input#session_password'
+      end
+
+      it "「ログインしたままにする」チェックボックスが表示される" do
+        expect(page).to have_content 'ログインしたままにする'
+        expect(page).to have_css 'input#session_remember_me'
       end
 
       it "ログインボタンが表示される" do
@@ -38,8 +43,8 @@ RSpec.describe "Sessions", type: :system do
 
     context "ログイン処理" do
       it "無効なユーザーでログインを行うとログインが失敗することを確認" do
-        fill_in "user_email", with: "user@example.com"
-        fill_in "user_password", with: "pass"
+        fill_in "session_email", with: "user@example.com"
+        fill_in "session_password", with: "pass"
         click_button "ログイン"
         expect(page).to have_content 'メールアドレスとパスワードの組み合わせが誤っています'
 
@@ -53,8 +58,8 @@ RSpec.describe "Sessions", type: :system do
         expect(page).to have_link 'ログイン', href: login_path
         expect(page).not_to have_link 'ログアウト', href: logout_path
 
-        fill_in "user_email", with: user.email
-        fill_in "user_password", with: user.password
+        fill_in "session_email", with: user.email
+        fill_in "session_password", with: user.password
         click_button "ログイン"
 
         expect(page).to have_link '使い方', href: about_path
