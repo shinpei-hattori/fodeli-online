@@ -5,6 +5,13 @@ def is_logged_in?
   !session[:user_id].nil?
 end
 
+def login_for_system(user)
+  visit login_path
+  fill_in "メールアドレス", with: user.email
+  fill_in "パスワード", with: "foobar"
+  click_button "ログイン"
+end
+
 # ログイン情報の保持なしで、ログイン
 def login_for_request(user)
   post login_path, params: { session: { email: user.email,

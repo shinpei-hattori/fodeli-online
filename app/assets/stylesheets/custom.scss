@@ -140,8 +140,68 @@ input {
     font-weight: normal;
   }
 }
+.radio {
+  width: auto;
+  margin: 0 20px;
+}
 
 #session_remember_me {
   width: auto;
   margin-left: 0;
+}
+
+//// プロフィールページ ////
+.title-profile {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.user-picture img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.user-picture-box {
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+
+.show-user-name {
+  display: inline-block;
+}
+
+.account-edit {
+  margin-top: 20px;
+}
+
+//// ユーザー一覧ページ ////
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-600;
+  }
+}
+//// ページネーション ////
+.pagination {
+  margin-top: 20px;
+  .page-item .page-link {
+    color: #f0f1f7;
+    border-radius: 15px;
+    background-color: #333c5e;
+  }
+  .page-item:not(:last-child) {
+    margin-right: 5px;
+  }
+  .page-item .page-link:hover {
+    border-radius: 15px;
+    background-color: #768fb5;
+  }
+  .active .page-link {
+    background-color: #8ec2c1;
+    border-color: #8ec2c1;
+  }
 }

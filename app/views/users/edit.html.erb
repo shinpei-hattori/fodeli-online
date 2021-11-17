@@ -1,0 +1,41 @@
+<% provide(:title, "プロフィール編集") %>
+<div class="row mt-5">
+  <div class="col-md-6 col-md-offset-3 mx-auto">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+    <div class="gravatar_edit">
+      <%= gravatar_for(@user, size: 40) %>
+      <%= @user.name %>
+      <a href="http://gravatar.com/emails" target="_blank">プロフィール写真を変更</a>
+    </div>
+    <p></p>
+    <div class = 'form-group'>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', id: 'user_name' %>
+    </div>
+    <div class = 'form-group'>
+      <%= f.label :email %>
+      <%= f.text_field :email, class: 'form-control', id: 'user_email' %>
+    </div>
+    <div class = 'form-group'>
+      <%= f.label :introduction %>
+      <%= f.text_area :introduction, size: "60x4", class: 'form-control', id: 'user_introduction' %>
+    </div>
+    <!-- <div class = 'form-group'>
+      <%= f.label :sex %>
+      <%= f.text_field :sex, class: 'form-control', id: 'user_sex' %>
+    </div> -->
+    <p class="border-bottom">性別</p>
+    <div class = 'form-group d-flex align-items-center'>
+      <%= f.label :sex, "男", for: "user_man",class: "m-0" %>
+      <%= f.radio_button :sex,"男", class: 'radio', id: 'user_man', checked: true %>
+      <%= f.label :sex, "女", for: "user_woman",class: "m-0" %>
+      <%= f.radio_button :sex,"女", class: 'radio', id: 'user_woman'%>
+    </div>
+
+    <%= f.submit "更新する", class: "btn btn-primary" %>
+    <%= link_to "アカウントを削除する", user_path(@user), method: :delete,
+                                data: { confirm: "本当にこのアカウントを削除してよろしいですか？" } %>
+    <% end %>
+  </div>
+</div>
