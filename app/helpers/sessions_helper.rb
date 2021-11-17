@@ -31,7 +31,7 @@ module SessionsHelper
     end
   end
 
-  #ログインしているユーザーならばtrueを返す。
+  # ログインしているユーザーならばtrueを返す。
   def logged_in?
     !current_user.nil?
   end
@@ -50,7 +50,7 @@ module SessionsHelper
     @current_user = nil
   end
 
-  #フレンドリーフォワーディング
+  # フレンドリーフォワーディング
   # 記憶したURL (もしくはデフォルト値) にリダイレクト
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
