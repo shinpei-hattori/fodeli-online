@@ -17,4 +17,23 @@
       <% end %>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control">
+          <option selected>ツイート履歴</option>
+          <option>参加予定のオフ会</option>
+          <option>登録チャット</option>
+        </select>
+      </div>
+      <% if @user.tweets.any? %>
+        <h3 class="mt-5">ツイート (<%= @user.tweets.count %>)</h3>
+        <ul class="tweets">
+          <%= render @tweets %>
+        </ul>
+        <%= paginate @tweets %>
+      <% end %>
+    </div>
+  </div>
 </div>

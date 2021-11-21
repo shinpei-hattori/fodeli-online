@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   delete :logout,    to: 'sessions#destroy'
   get :signup,       to: 'users#new'
   resources :users
+  resources :tweets
   root 'static_pages#home'
   get :about,        to: 'static_pages#about'
 end

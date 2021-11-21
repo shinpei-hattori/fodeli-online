@@ -13,3 +13,10 @@ User.create!(name:  name,
     password:              password,
     password_confirmation: password)
 end
+
+10.times do |n|
+Tweet.create!(
+  content: "UverEats楽しい！",
+  user_id: 1
+)
+end

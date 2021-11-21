@@ -205,3 +205,26 @@ input {
     border-color: #8ec2c1;
   }
 }
+
+///ツイートのスタイル
+.tweets {
+  list-style: none;
+  li {
+    border-top: 1px solid #eaeaea;
+  }
+}
+
+.content {
+  word-break: break-all;
+}
+
+.timestamp {
+  color: $gray-600;
+}
+
+///ルートページのuser-info
+.user_info {
+  img {
+    border-radius: 10px;
+  }
+}

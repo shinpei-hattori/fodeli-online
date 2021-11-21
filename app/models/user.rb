@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :tweets, dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -24,6 +25,11 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
+  end
+
+    # フィード一覧を取得
+  def feed
+    Tweet.where("user_id = ?", self.id)
   end
 
   # 永続セッションのためにユーザーをデータベースに記憶する

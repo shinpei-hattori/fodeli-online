@@ -4,6 +4,7 @@ RSpec.describe "ユーザーの削除", type: :request do
   let!(:admin_user) { create(:user, :admin) }
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
+  let!(:tweet) { create(:tweet, user: user) }
 
   context "管理者ユーザーの場合" do
     it "ユーザーを削除後、ユーザー一覧ページにリダイレクト" do
@@ -44,4 +45,14 @@ RSpec.describe "ユーザーの削除", type: :request do
       expect(response).to redirect_to login_path
     end
   end
+
+  context "ツイートが紐づくユーザーを削除した場合" do
+    it "ユーザーと同時に紐づくツイートも削除される" do
+      login_for_request(user)
+      expect {
+        delete user_path(user)
+      }.to change(Tweet, :count).by(-1)
+    end
+  end
+
 end

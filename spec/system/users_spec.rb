@@ -10,7 +10,7 @@ RSpec.describe "Users", type: :system do
       login_for_system(user)
       visit users_path
       expect(page).to have_css "ul.pagination"
-      User.paginate(page: 1).each do |u|
+      User.page(1).each do |u|
         expect(page).to have_link u.name, href: user_path(u)
       end
     end
@@ -23,7 +23,7 @@ RSpec.describe "Users", type: :system do
         login_for_system(admin_user)
         visit users_path
         expect(page).to have_css "ul.pagination"
-        User.paginate(page: 1).each do |u|
+        User.page(1).each do |u|
           expect(page).to have_link u.name, href: user_path(u)
           expect(page).to have_content "#{u.name} | 削除" unless u == admin_user
         end
@@ -36,7 +36,7 @@ RSpec.describe "Users", type: :system do
         login_for_system(user)
         visit users_path
         expect(page).to have_css "ul.pagination"
-        User.paginate(page: 1).each do |u|
+        User.page(1).each do |u|
           expect(page).to have_link u.name, href: user_path(u)
           if u == user
             expect(page).to have_content "#{u.name} | 削除"
@@ -134,6 +134,7 @@ RSpec.describe "Users", type: :system do
     context "ページレイアウト" do
       before do
         login_for_system user
+        create_list(:tweet, 10, user: user)
         visit user_path(user)
       end
 
@@ -153,6 +154,21 @@ RSpec.describe "Users", type: :system do
 
       it "プロフィール編集ページへのリンクが表示されていることを確認" do
         expect(page).to have_link 'プロフィール編集', href: edit_user_path(user)
+      end
+
+      it "ツイートの件数が表示されていることを確認" do
+        expect(page).to have_content "ツイート (#{user.tweets.count})"
+      end
+
+      it "ツイートの情報と削除リンクが表示されていることを確認" do
+        Tweet.take(5).each do |tweet|
+          expect(page).to have_content tweet.content
+          expect(page).to have_link "削除"
+        end
+      end
+
+      it "ツイートのページネーションが表示されていることを確認" do
+        expect(page).to have_css "ul.pagination"
       end
     end
   end
