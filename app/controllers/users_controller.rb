@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tweets = @user.tweets
+    @tweets = Kaminari.paginate_array(@tweets).page(params[:page]).per(5)
   end
 
   def index
@@ -34,7 +36,8 @@ class UsersController < ApplicationController
       flash[:success] = "プロフィールが更新されました！"
       redirect_to @user
     else
-      render 'edit'
+      flash[:danger] = @user.errors.full_messages
+      redirect_to edit_user_path(@user)
     end
   end
 

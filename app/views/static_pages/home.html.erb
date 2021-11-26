@@ -1,4 +1,22 @@
 <div class="container mt-5">
+<% if logged_in? %>
+  <div class="container">
+    <section class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+          <%= render 'shared/user_info' %>
+        </section>
+        <section class="tweet_form">
+          <%= render 'shared/tweet_form' %>
+        </section>
+      </aside>
+      <div class="col-md-8">
+        <h3>みんなのツイート (<%= @feed_count %>)</h3>
+        <%= render 'shared/feed' %>
+      </div>
+    </section>
+  </div>
+<% else %>
   <h1>Fodeli Onlineとは？</h1>
   <p class="text-center mb-5">フードデリバリー配達員が仕事に関する情報交換や、同業種の繋がり作ることができるサービスです。</p>
   <div class="row  mb-5">
@@ -19,4 +37,5 @@
     ​</p>
     <%=image_tag("off.jpg", :alt => "",class: "col-6 border rounded shadow p-0")%>
   </div>
+<% end %>
 </div>

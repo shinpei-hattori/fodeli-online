@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :system do
   describe "トップページ" do
+    let!(:user) { create(:user) }
+    let!(:tweet) { create(:tweet, user: user) }
+
     context "ページ全体" do
       before do
         visit root_path
@@ -13,6 +16,60 @@ RSpec.describe "StaticPages", type: :system do
 
       it "正しいタイトルが表示されることを確認" do
         expect(page).to have_title full_title
+      end
+
+      context "ツイートフォーム" do
+        it "フォームが存在すること" do
+          login_for_system(user)
+          visit root_path
+          expect(page).to have_css "section.user_info"
+          expect(page).to have_css "section.tweet_form"
+        end
+        context "ツイート新規登録" do
+          it "無効な情報で投稿を行うと失敗のエラーが表示されること" do
+            login_for_system(user)
+            visit root_path
+            fill_in "tweet_content", with: ""
+            click_button "投稿"
+            expect(page).to have_content "ツイートを入力してください"
+          end
+          it "有効な情報で投稿を行うと成功時のフラッシュが表示されること" do
+            login_for_system(user)
+            visit root_path
+            fill_in "tweet_content", with: "今日は８時間稼働します！"
+            click_button "投稿"
+            expect(page).to have_content "ツイートを投稿しました！"
+          end
+        end
+
+        context "ツイート削除処理", js: true do
+          it "正しく削除できること" do
+            login_for_system(user)
+            visit root_path
+            click_on "削除"
+            page.driver.browser.switch_to.alert.accept
+            expect(page).to have_content "ツイートを削除しました！"
+          end
+        end
+      end
+
+      context "ツイートフィード", js: true do
+        it "ツイートのぺージネーションが表示されることと投稿したユーザーであれば削除リンクが表示されていること" do
+          login_for_system(user)
+          create_list(:tweet, 6, user: user)
+          visit root_path
+          expect(page).to have_content "みんなのツイート"
+          expect(page).to have_content "(#{user.tweets.count})"
+          expect(page).to have_css "ul.pagination"
+          if user.id == tweet.user_id
+            expect(page).to have_link "削除"
+          else
+            expect(page).not_to have_link "削除"
+          end
+          Tweet.take(5).each do |t|
+            expect(page).to have_content t.content
+          end
+        end
       end
     end
   end

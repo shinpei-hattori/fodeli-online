@@ -3,9 +3,9 @@
     <%= link_to(image_tag("logo.png", :alt => ""), root_url, id: 'logo') %>
     <nav class="navbar-expand-lg">
         <ul class="nav navbar-nav mr-auto">
-          <li class="nav-item"><%= link_to '使い方', about_path ,class: 'nav-link'%></li>
+          <li class="nav-item d-flex align-items-center"><i class="fas fa-book-open"></i><%= link_to '使い方', about_path ,class: 'nav-link ml-1'%></li>
         <% if logged_in? %>
-          <li><%= link_to 'ユーザー一覧', users_path ,class: 'nav-link'  %></li>
+          <li class="d-flex align-items-center"><i class="fas fa-user"></i><%= link_to 'ユーザー一覧', users_path ,class: 'nav-link'  %></li>
           <div class="dropdown ml-2">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
               アカウント

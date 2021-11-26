@@ -20,6 +20,12 @@ RSpec.describe User, type: :model do
       expect(user.errors[:name]).to include("は50文字以内で入力してください")
     end
 
+    it "自己紹介文は255文字以内であること" do
+      user = build(:user, introduction: "a" * 256)
+      user.valid?
+      expect(user.errors[:introduction]).to include("は255文字以内で入力してください")
+    end
+
     it "メールアドレスがなければ無効な状態であること" do
       user = build(:user, email: nil)
       user.valid?

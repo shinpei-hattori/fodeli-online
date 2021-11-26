@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :tweets, dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -8,6 +9,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :introduction, length: { maximum: 255 }
 
   class << self # クラスメソッド 使用例 User.digest("aaa")
     # 渡された文字列のハッシュ値を返す
@@ -24,6 +26,11 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
+  end
+
+  # フィード一覧を取得
+  def feed
+    Tweet.where("user_id = ?", id)
   end
 
   # 永続セッションのためにユーザーをデータベースに記憶する
