@@ -54,5 +54,4 @@ RSpec.describe "ユーザーの削除", type: :request do
       }.to change(Tweet, :count).by(-1)
     end
   end
-
 end

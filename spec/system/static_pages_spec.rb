@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :system do
-
   describe "トップページ" do
     let!(:user) { create(:user) }
     let!(:tweet) { create(:tweet, user: user) }
+
     context "ページ全体" do
       before do
         visit root_path
@@ -29,14 +29,14 @@ RSpec.describe "StaticPages", type: :system do
           it "無効な情報で投稿を行うと失敗のエラーが表示されること" do
             login_for_system(user)
             visit root_path
-            fill_in "tweet_content",with: ""
+            fill_in "tweet_content", with: ""
             click_button "投稿"
             expect(page).to have_content "ツイートを入力してください"
           end
           it "有効な情報で投稿を行うと成功時のフラッシュが表示されること" do
             login_for_system(user)
             visit root_path
-            fill_in "tweet_content",with: "今日は８時間稼働します！"
+            fill_in "tweet_content", with: "今日は８時間稼働します！"
             click_button "投稿"
             expect(page).to have_content "ツイートを投稿しました！"
           end
@@ -52,7 +52,6 @@ RSpec.describe "StaticPages", type: :system do
           end
         end
       end
-
 
       context "ツイートフィード", js: true do
         it "ツイートのぺージネーションが表示されることと投稿したユーザーであれば削除リンクが表示されていること" do
@@ -72,9 +71,6 @@ RSpec.describe "StaticPages", type: :system do
           end
         end
       end
-
-
-
     end
   end
 

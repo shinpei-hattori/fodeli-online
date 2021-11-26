@@ -9,7 +9,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @tweets = @user.tweets
     @tweets = Kaminari.paginate_array(@tweets).page(params[:page]).per(5)
-
   end
 
   def index

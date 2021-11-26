@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_user,   only: [:edit, :update,:destroy ]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def new
     @tweet = Tweet.new
@@ -39,7 +39,9 @@ class TweetsController < ApplicationController
   def destroy
     @tweet.destroy
     flash[:success] = "ツイートを削除しました！"
-    if request.referer&.include?(edit_tweet_path(@tweet)) || request.referer&.include?(tweet_path(@tweet))
+    if request.referer&.include?(edit_tweet_path(@tweet))
+      redirect_to root_url
+    elsif request.referer&.include?(tweet_path(@tweet))
       redirect_to root_url
     else
       redirect_to request.referrer || root_url
@@ -59,5 +61,4 @@ class TweetsController < ApplicationController
         redirect_to root_url
       end
     end
-
 end

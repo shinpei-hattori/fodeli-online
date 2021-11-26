@@ -63,8 +63,6 @@ RSpec.describe "TweetsSpecs", type: :system do
           expect(page).to have_title full_title("プロフィール")
         end
       end
-
-
     end
   end
 

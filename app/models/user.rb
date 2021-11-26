@@ -28,9 +28,9 @@ class User < ApplicationRecord
     end
   end
 
-    # フィード一覧を取得
+  # フィード一覧を取得
   def feed
-    Tweet.where("user_id = ?", self.id)
+    Tweet.where("user_id = ?", id)
   end
 
   # 永続セッションのためにユーザーをデータベースに記憶する

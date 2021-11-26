@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Tweet, type: :model do
-  let(:tweet) { create(:tweet)}
+  let(:tweet) { create(:tweet) }
 
   context "バリデーション" do
     it "有効な状態であること" do
@@ -26,5 +26,4 @@ RSpec.describe Tweet, type: :model do
       expect(tweet.errors[:user_id]).to include("を入力してください")
     end
   end
-
 end
