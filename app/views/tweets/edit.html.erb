@@ -1,0 +1,23 @@
+<% provide(:title, "ツイートの編集") %>
+<div class="container">
+  <div class="row mt-5">
+    <section id="tweet-<%= @tweet.id %>" class="col-md-4">
+      <%= link_to gravatar_for(@tweet.user, size: 50), @tweet.user %>
+      <span class="user ml-3"><%= link_to @tweet.user.name, @tweet.user %></span>
+      <%= form_with(model: @tweet, local: true) do |t| %>
+      <div class = 'form-group'>
+        <%= t.text_area :content, class: 'form-control mt-3', id: 'tweet_content' %>
+      </div>
+      <%= t.submit "更新する", class: "btn btn-primary" %>
+      <% end %>
+      <span class="timestamp">
+        <%= time_ago_in_words(@tweet.created_at) %>前に投稿
+      </span>
+      <% if current_user?(@tweet.user) %>
+          <%= link_to "削除", @tweet, method: :delete,
+                                           data: { confirm: "投稿を削除しますか?" } %>
+        <% end %>
+    </section>
+  </div>
+</div>
+

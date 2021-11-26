@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "UsersIndex", type: :request do
+RSpec.describe "ユーザー一覧ページ", type: :request do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
 

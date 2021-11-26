@@ -23,6 +23,7 @@ RSpec.describe "プロフィール編集", type: :request do
       expect(response).to render_template('users/edit')
       patch user_path(user), params: { user: { name: "",
                                                email: "xxx@invalid" } }
+      follow_redirect!
       expect(response).to render_template('users/edit')
     end
   end

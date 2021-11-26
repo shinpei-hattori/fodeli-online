@@ -19,6 +19,7 @@ RSpec.describe "ツイートの投稿", type: :request do
     expect {
       post tweets_path, params: { tweet: { content: ""
                                           }}}.not_to change(Tweet,:count)
+    follow_redirect!
     expect(response).to render_template('static_pages/home')
   end
 

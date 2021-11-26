@@ -18,12 +18,41 @@ RSpec.describe "StaticPages", type: :system do
         expect(page).to have_title full_title
       end
 
-      it "ツイートフォーム" do
-        login_for_system(user)
-        visit root_path
-        expect(page).to have_css "section.user_info"
-        expect(page).to have_css "section.tweet_form"
+      context "ツイートフォーム" do
+        it "フォームが存在すること" do
+          login_for_system(user)
+          visit root_path
+          expect(page).to have_css "section.user_info"
+          expect(page).to have_css "section.tweet_form"
+        end
+        context "ツイート新規登録" do
+          it "無効な情報で投稿を行うと失敗のエラーが表示されること" do
+            login_for_system(user)
+            visit root_path
+            fill_in "tweet_content",with: ""
+            click_button "投稿"
+            expect(page).to have_content "ツイートを入力してください"
+          end
+          it "有効な情報で投稿を行うと成功時のフラッシュが表示されること" do
+            login_for_system(user)
+            visit root_path
+            fill_in "tweet_content",with: "今日は８時間稼働します！"
+            click_button "投稿"
+            expect(page).to have_content "ツイートを投稿しました！"
+          end
+        end
+
+        context "ツイート削除処理", js: true do
+          it "正しく削除できること" do
+            login_for_system(user)
+            visit root_path
+            click_on "削除"
+            page.driver.browser.switch_to.alert.accept
+            expect(page).to have_content "ツイートを削除しました！"
+          end
+        end
       end
+
 
       context "ツイートフィード", js: true do
         it "ツイートのぺージネーションが表示されることと投稿したユーザーであれば削除リンクが表示されていること" do
@@ -44,15 +73,7 @@ RSpec.describe "StaticPages", type: :system do
         end
       end
 
-      context "ツイート削除処理", js: true do
-        it "正しく削除できること" do
-          login_for_system(user)
-          visit root_path
-          click_on "削除"
-          page.driver.browser.switch_to.alert.accept
-          expect(page).to have_content "ツイートを削除しました！"
-        end
-      end
+
 
     end
   end
