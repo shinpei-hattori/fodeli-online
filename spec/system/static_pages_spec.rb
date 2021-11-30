@@ -40,6 +40,15 @@ RSpec.describe "StaticPages", type: :system do
             click_button "投稿"
             expect(page).to have_content "ツイートを投稿しました！"
           end
+
+          it "画像を選択し投稿するとツイートに画像が反映されていること" do
+            login_for_system(user)
+            visit root_path
+            fill_in "tweet_content", with: "今日は８時間稼働します！"
+            attach_file 'tweet_pictures', "#{Rails.root}/spec/fixtures/files/test_image.jpg"
+            click_button "投稿"
+            expect(page).to have_selector("img[src$='test_image.jpg']")
+          end
         end
 
         context "ツイート削除処理", js: true do

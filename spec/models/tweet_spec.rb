@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Tweet, type: :model do
   let(:tweet) { create(:tweet) }
+  let(:picture_path) { File.join(Rails.root, 'spec/fixtures/files/test_image.jpg') }
+  let(:picture) { [Rack::Test::UploadedFile.new(picture_path)] }
 
   context "バリデーション" do
     it "有効な状態であること" do
@@ -24,6 +26,12 @@ RSpec.describe Tweet, type: :model do
       tweet = build(:tweet, user_id: nil)
       tweet.valid?
       expect(tweet.errors[:user_id]).to include("を入力してください")
+    end
+
+    it "画像が保存できること" do
+      tweet = build(:tweet)
+      tweet.pictures[0] = picture
+      expect(tweet.valid?).to be_truthy
     end
   end
 end

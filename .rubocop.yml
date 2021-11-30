@@ -33,6 +33,9 @@ Layout/IndentationConsistency:
 Layout/IndentationWidth:
   Enabled: false
 
+Layout/LineLength:
+  Enabled: false
+
 Style/MixinUsage:
   Enabled: false
 

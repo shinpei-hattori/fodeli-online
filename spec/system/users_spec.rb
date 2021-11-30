@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
+  let(:picture_path) { File.join(Rails.root, 'spec/fixtures/files/test_image.jpg') }  # 追記
+  let(:picture) { Rack::Test::UploadedFile.new(picture_path) }
 
   describe "ユーザー一覧ページ" do
     it "ぺージネーション、削除ボタンが表示されること" do
@@ -131,10 +133,13 @@ RSpec.describe "Users", type: :system do
   end
 
   describe "プロフィールページ" do
+    let(:tweet) { create(:tweet, user: user, pictures: [picture]) } # 画像表示確認用
+
     context "ページレイアウト" do
       before do
         login_for_system user
         create_list(:tweet, 10, user: user)
+        tweet # 画像添付されているツイートを一番上に表示させるため
         visit user_path(user)
       end
 
@@ -169,6 +174,10 @@ RSpec.describe "Users", type: :system do
 
       it "ツイートのページネーションが表示されていることを確認" do
         expect(page).to have_css "ul.pagination"
+      end
+
+      it "画像が表示されていることを確認" do
+        expect(page).to have_selector("img[src$='test_image.jpg']")
       end
     end
   end

@@ -5,6 +5,11 @@
       <%= link_to gravatar_for(@tweet.user, size: 50), @tweet.user %>
       <span class="user ml-3"><%= link_to @tweet.user.name, @tweet.user %></span>
       <p class="content mt-3"><%= @tweet.content %></p>
+      <% if @tweet.pictures? %>
+        <% @tweet.pictures.each do |picture| %>
+        <p><%= image_tag picture.to_s %></p>
+        <% end %>
+      <% end %>
       <% if current_user == @tweet.user %>
         <p><i class="fas fa-arrow-circle-right mr-2"></i><%= link_to "投稿を編集する", edit_tweet_path(@tweet) %></p>
       <% end %>

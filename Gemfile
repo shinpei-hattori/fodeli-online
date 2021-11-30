@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.7'
 gem 'rails', '5.2.3'
+gem 'carrierwave',             '1.2.2'
+gem "mini_magick",             '>= 4.9.4'
+gem 'active_storage_validations', '0.8.2'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
@@ -16,6 +19,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'faker'
 gem 'kaminari'
+
+group :production do
+ gem 'fog', '1.42'
+end
 
 group :development, :test do
   gem 'rspec-rails', '~> 4.0.0.beta2'

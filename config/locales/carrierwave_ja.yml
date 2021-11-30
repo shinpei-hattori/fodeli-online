@@ -1,0 +1,4 @@
+ja:
+  errors:
+    messages:
+      max_size_error: 'ファイルを5MB以下のサイズにしてください'
