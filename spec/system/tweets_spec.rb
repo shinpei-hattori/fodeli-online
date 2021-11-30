@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "TweetsSpecs", type: :system do
   let!(:user) { create(:user) }
-  let!(:tweet) { create(:tweet, user: user) }
+  let!(:tweet) { create(:tweet, user: user, pictures: [picture]) }
+  let(:picture_path) { File.join(Rails.root, 'spec/fixtures/files/test_image.jpg') }
+  let(:picture) { Rack::Test::UploadedFile.new(picture_path) }
 
   describe "ツイート詳細ページ" do
     context "ページレイアウト" do
@@ -18,6 +20,7 @@ RSpec.describe "TweetsSpecs", type: :system do
       it "ツイート情報が表示されること" do
         expect(page).to have_link tweet.user.name, href: user_path(tweet.user)
         expect(page).to have_content tweet.content
+        expect(page).to have_selector("img[src$='test_image.jpg']")
         if tweet.user == user
           expect(page).to have_link "投稿を編集する", href: edit_tweet_path(tweet)
           expect(page).to have_link "削除", href: tweet_path(tweet)

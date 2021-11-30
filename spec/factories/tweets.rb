@@ -15,4 +15,5 @@ FactoryBot.define do
   trait :one_month_ago do
     created_at { 1.month.ago }
   end
+
 end
