@@ -49,8 +49,6 @@ RSpec.describe "StaticPages", type: :system do
             click_button "投稿"
             expect(page).to have_selector("img[src$='test_image.jpg']")
           end
-
-
         end
 
         context "ツイート削除処理", js: true do

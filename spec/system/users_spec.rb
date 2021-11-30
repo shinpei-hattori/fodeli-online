@@ -133,12 +133,13 @@ RSpec.describe "Users", type: :system do
   end
 
   describe "プロフィールページ" do
-    let(:tweet) { create(:tweet, user: user,pictures: [picture]) } #画像表示確認用
+    let(:tweet) { create(:tweet, user: user, pictures: [picture]) } # 画像表示確認用
+
     context "ページレイアウト" do
       before do
         login_for_system user
         create_list(:tweet, 10, user: user)
-        tweet #画像添付されているツイートを一番上に表示させるため
+        tweet # 画像添付されているツイートを一番上に表示させるため
         visit user_path(user)
       end
 

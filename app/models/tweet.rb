@@ -6,7 +6,6 @@ class Tweet < ApplicationRecord
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
 
-
   private
 
     # アップロードされた画像のサイズをバリデーションする
