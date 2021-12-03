@@ -80,9 +80,10 @@ RSpec.describe "Relationships", type: :system do
   end
 
   describe "フィード" do
-    let!(:tweet){create(:tweet,user_id: user.id)}
-    let!(:tweet2){create(:tweet,user_id: user2.id)}
-    let!(:tweet3){create(:tweet,user_id: user3.id)}
+    let!(:tweet) { create(:tweet, user_id: user.id) }
+    let!(:tweet2) { create(:tweet, user_id: user2.id) }
+    let!(:tweet3) { create(:tweet, user_id: user3.id) }
+
     before do
       create(:relationship, follower_id: user.id, followed_id: user2.id)
       login_for_system(user)
@@ -100,5 +101,4 @@ RSpec.describe "Relationships", type: :system do
       expect(user.feed).not_to include tweet3
     end
   end
-
 end
