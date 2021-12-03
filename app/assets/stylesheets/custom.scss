@@ -172,10 +172,6 @@ input {
   border-left: 5px solid #ccff66;
 }
 
-.show-user-name {
-  // display: inline-block;
-}
-
 .show-user-introduction {
   word-break: break-all;
 }
@@ -247,4 +243,10 @@ input {
   img {
     border-radius: 10px;
   }
+}
+
+//フォロー&フォロワー一覧
+.follow-status {
+  background-color: #ccffcc;
+  border-left: 5px solid #ccff66;
 }

@@ -14,9 +14,17 @@ User.create!(name:  name,
     password_confirmation: password)
 end
 
-10.times do |n|
-Tweet.create!(
-  content: "UverEats楽しい！",
-  user_id: 1
-)
+# マイクロポスト
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(word_count: 5)
+  users.each { |user| user.tweets.create!(content: content) }
 end
+
+# リレーションシップ
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
