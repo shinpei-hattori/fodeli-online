@@ -12,12 +12,12 @@
       <span class="timestamp">
         <%= time_ago_in_words(tweet.created_at) %>前に投稿
       </span>
-      <object data="" type="">
-        <% if current_user?(tweet.user) %>
-            <%= link_to "削除", tweet, method: :delete,
-                                            data: { confirm: "投稿を削除しますか?" } %>
-        <% end %>
-      </object>
+      <% if current_user?(tweet.user) %>
+        <object>
+              <%= link_to "削除", tweet, method: :delete,
+                                              data: { confirm: "投稿を削除しますか?" } %>
+        </object>
+      <% end %>
     </div>
   <% end %>
 </li>

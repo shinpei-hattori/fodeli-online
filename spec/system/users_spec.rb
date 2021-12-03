@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
+  let!(:other_user) { create(:user) }
   let(:picture_path) { File.join(Rails.root, 'spec/fixtures/files/test_image.jpg') }  # 追記
   let(:picture) { Rack::Test::UploadedFile.new(picture_path) }
 
@@ -178,6 +179,18 @@ RSpec.describe "Users", type: :system do
 
       it "画像が表示されていることを確認" do
         expect(page).to have_selector("img[src$='test_image.jpg']")
+      end
+
+      context "ユーザーのフォロー/アンフォロー処理", js: true do
+        it "ユーザーのフォロー/アンフォローができること" do
+          login_for_system(user)
+          visit user_path(other_user)
+          expect(page).to have_button 'フォローする'
+          click_button 'フォローする'
+          expect(page).to have_button 'フォロー中'
+          click_button 'フォロー中'
+          expect(page).to have_button 'フォローする'
+        end
       end
     end
   end

@@ -12,7 +12,7 @@ class Tweet < ApplicationRecord
     def picture_size
       pictures.each do |picture|
         if picture.size > 5.megabytes
-          errors.add(:pictures, "は1MB未満で投稿してください")
+          errors.add(:pictures, "は5MB未満で投稿してください")
         end
       end
     end

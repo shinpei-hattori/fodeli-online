@@ -5,20 +5,25 @@
     <div class="col-md-4">
       <div class="user-picture-box">
         <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
+        <section class="stats">
+          <%= render 'shared/stats' %>
+        </section>
         <% if current_user == @user %>
           <div class="account-edit"><i class="fas fa-arrow-circle-right mr-2"></i><%= link_to "プロフィール編集", edit_user_path(@user) %></div>
         <% end %>
       </div>
     </div>
     <div class="col-md-8">
+      <%= render 'follow_form' if logged_in? %>
       <p class="show-user-head p-2 mb-3">名前</p>
       <h4 class="show-user-name pl-3"><%= @user.name %></h4>
       <p class="show-user-head p-2 mb-3">性別</p>
       <p class="pl-3"><%= @user.sex %></p>
       <div class="show-user-introduction">
         <p class="show-user-head p-2 mb-3">自己紹介</p>
-      <p class="pl-3"><%= @user.introduction %></p>
+        <p class="pl-3"><%= @user.introduction %></p>
       </div>
+
 
     </div>
   </div>

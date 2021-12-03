@@ -31,3 +31,5 @@
 
 # Ignore unnecessary pictures
 /public/uploads/*
+
+/.env
