@@ -86,17 +86,17 @@ class User < ApplicationRecord
 
   # ツイートにいいね登録する
   def like(tweet)
-    Like.create!(user_id: self.id, tweet_id: tweet.id)
+    Like.create!(user_id: id, tweet_id: tweet.id)
   end
 
   # ツイートのいいねを解除する
   def unlike(tweet)
-    Like.find_by(user_id: self.id, tweet_id: tweet.id).destroy
+    Like.find_by(user_id: id, tweet_id: tweet.id).destroy
   end
 
   # 現在のユーザーがいいね登録してたらtrueを返す
   def like?(tweet)
-    !Like.find_by(user_id: self.id, tweet_id: tweet.id).nil?
+    !Like.find_by(user_id: id, tweet_id: tweet.id).nil?
   end
 
   private

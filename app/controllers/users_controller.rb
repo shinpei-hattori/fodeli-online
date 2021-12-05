@@ -13,11 +13,9 @@ class UsersController < ApplicationController
       @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)
     elsif @selected_status == "いいねしたツイート"
       @like_tweet = Kaminari.paginate_array(@user.likes.map(&:tweet)).page(params[:page]).per(5)
-    elsif @selected_status == nil
+    elsif @selected_status.nil?
       @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)
     end
-
-
   end
 
   def index

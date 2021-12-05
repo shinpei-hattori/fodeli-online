@@ -136,7 +136,6 @@ RSpec.describe "Users", type: :system do
   describe "プロフィールページ" do
     let(:tweet) { create(:tweet, user: user, pictures: [picture]) } # 画像表示確認用
 
-
     context "ページレイアウト" do
       before do
         login_for_system user
@@ -209,10 +208,12 @@ RSpec.describe "Users", type: :system do
       end
 
       context "セレクトボックスの選択によって動的にコンテンツが変化すること" do
-        let!(:like){create(:like,user: user,tweet: tweet)}
+        let!(:like) { create(:like, user: user, tweet: tweet) }
+
         before do
           login_for_system(user)
         end
+
         it "デフォルトではツイート内容が表示されること" do
           t = tweet
           visit user_path(user)
@@ -220,7 +221,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_css "ul.tweets"
           expect(page).to have_css "li#tweet-#{t.id}"
         end
-        it "いいねしたツイートを選択すると、いいねしたツイート内容が表示されること", js: true  do
+        it "いいねしたツイートを選択すると、いいねしたツイート内容が表示されること", js: true do
           visit user_path(user)
           select "いいねしたツイート", from: "status"
           expect(page).to have_content "いいねしたツイート (#{user.likes.count})"
@@ -230,5 +231,4 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
-
 end

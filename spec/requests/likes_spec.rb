@@ -53,6 +53,4 @@ RSpec.describe "ツイートのいいね登録機能", type: :request do
       end
     end
   end
-
-
 end

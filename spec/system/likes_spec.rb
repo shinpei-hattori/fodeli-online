@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "LikeSpec.rbs", type: :system do
   let!(:user) { create(:user) }
-  let!(:tweet) {create(:tweet, user: user)}
+  let!(:tweet) { create(:tweet, user: user) }
 
   context "ツイートのいいね登録/解除" do
     before do
       login_for_system(user)
     end
+
     it "トップページからいいね登録/解除ができること", js: true do
       visit root_path
       link = find('.like')
