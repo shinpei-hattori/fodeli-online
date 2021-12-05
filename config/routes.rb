@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   resources :tweets
   root 'static_pages#home'
   get :about,        to: 'static_pages#about'
+  post   "likes/:tweet_id/create"  => "likes#create"
+  delete "likes/:tweet_id/destroy" => "likes#destroy"
 
 end

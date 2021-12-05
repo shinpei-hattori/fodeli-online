@@ -250,3 +250,20 @@ input {
   background-color: #ccffcc;
   border-left: 5px solid #ccff66;
 }
+
+// いいね
+.like-btn-unlike {
+  color: red;
+}
+.like-btn-like {
+  color: grey;
+}
+#like-tweet-group {
+  .like-tweet {
+    list-style: none;
+    li {
+      padding: 0;
+      border-top: 1px solid #eaeaea;
+    }
+  }
+}

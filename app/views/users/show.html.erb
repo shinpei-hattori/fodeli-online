@@ -31,19 +31,41 @@
     <div class="col-md-9">
       <div class="form-group col-md-4">
         <!-- <label for="inputState">State</label> -->
-        <select id="inputState" class="form-control">
-          <option selected>ツイート履歴</option>
-          <option>参加予定のオフ会</option>
-          <option>登録チャット</option>
-        </select>
+
+        <%= form_with(url: user_path(@user),method: :get,id: "profile-status",remote: true)do |f|%>
+          <%= hidden_field_tag :id, @user.id %>
+          <%= select_tag :status, options_for_select(["ツイート履歴", "いいねしたツイート", "参加予定のオフ会","登録チャット"],@selected_status), class: "form-control select-drop" %>
+        <% end %>
+
+
+
+        <script>
+          $(document).ready(function(){
+            $(".select-drop").change(function(){
+              $('#profile-status').submit();
+            });
+          });
+      </script>
       </div>
-      <% if @user.tweets.any? %>
-        <h3 class="mt-5">ツイート (<%= @user.tweets.count %>)</h3>
-        <ul class="tweets">
-          <%= render @tweets %>
-        </ul>
-        <%= paginate @tweets %>
-      <% end %>
+      <section id="like-tweet-group">
+        <% if !@like_tweet.nil? %>
+          <h3 class="mt-5">いいねしたツイート (<%= @like_tweet.count %>)</h3>
+          <ul class="like-tweet">
+            <%= render @like_tweet %>
+          </ul>
+          <%= paginate @like_tweet,params: {status: "いいねしたツイート"} %>
+        <% end %>
+      </section>
+
+      <section id="tweets-group">
+        <% if !@tweets.nil? %>
+          <h3 class="mt-5">ツイート (<%= @user.tweets.count %>)</h3>
+          <ul class="tweets">
+            <%= render @tweets %>
+          </ul>
+          <%= paginate @tweets,params: {status: "ツイート履歴"} %>
+        <% end %>
+      </section>
     </div>
   </div>
 </div>

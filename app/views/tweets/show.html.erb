@@ -4,6 +4,7 @@
     <section id="tweet-<%= @tweet.id %>" class="col-md-4">
       <%= link_to gravatar_for(@tweet.user, size: 50), @tweet.user %>
       <span class="user ml-3"><%= link_to @tweet.user.name, @tweet.user %></span>
+      <%= render 'users/like_form' %>
       <p class="content mt-3"><%= @tweet.content %></p>
       <% if @tweet.pictures? %>
         <% @tweet.pictures.each do |picture| %>

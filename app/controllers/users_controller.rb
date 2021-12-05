@@ -7,8 +7,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @tweets = @user.tweets
-    @tweets = Kaminari.paginate_array(@tweets).page(params[:page]).per(5)
+    @selected_status = params[:status]
+    # debugger
+    if @selected_status == "ツイート履歴"
+      @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)
+    elsif @selected_status == "いいねしたツイート"
+      @like_tweet = Kaminari.paginate_array(@user.likes.map(&:tweet)).page(params[:page]).per(5)
+    elsif @selected_status == nil
+      @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)
+    end
+
+
   end
 
   def index

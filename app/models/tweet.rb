@@ -1,5 +1,6 @@
 class Tweet < ApplicationRecord
   belongs_to :user
+  has_many :likes, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   mount_uploaders :pictures, PictureUploader
   validates :user_id, presence: true
