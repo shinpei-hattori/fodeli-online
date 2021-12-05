@@ -1,0 +1,2 @@
+$("#like-<%= @tweet.id %>").html("<%= escape_javascript(render('users/like')) %>");
+$("#like-<%= @tweet.id %> #like_count").html('<%= @tweet.likes.count %>');

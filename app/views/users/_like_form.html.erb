@@ -1,0 +1,7 @@
+<div id="like-<%= @tweet.id %>" class="float-right clearfix">
+  <% if !current_user.nil? && current_user.like?(@tweet) %>
+    <%= render 'users/unlike' %>
+  <% else %>
+    <%= render 'users/like' %>
+  <% end %>
+</div>

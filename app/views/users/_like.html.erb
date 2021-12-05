@@ -1,0 +1,6 @@
+<%= link_to "/likes/#{@tweet.id}/create",
+            method: :post,
+            class: 'like',
+            remote: true do %>
+  <div class="like-btn-like"><i class="fa fa-heart"></i><span id="like_count" class="ml-2"><%=@like_count%></span></div>
+<% end %>

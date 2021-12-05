@@ -1,20 +1,23 @@
-<li id="tweet-<%= tweet.id %>" class="">
-  <%= link_to(tweet,class: "d-block tweet-link") do %>
+<% @tweet = tweet %>
+<% @like_count = @tweet.likes.count %>
+<li id="tweet-<%= @tweet.id %>" class="">
+  <%= link_to(@tweet,class: "d-block tweet-link") do %>
     <div class="p-2">
-      <object><%= link_to gravatar_for(tweet.user, size: 50), tweet.user %></object>
-      <object class="user ml-3"><%= link_to tweet.user.name, tweet.user %></object>
-      <p class="content"><%= tweet.content %></p>
-      <% if tweet.pictures? %>
-        <% tweet.pictures.each do |picture| %>
+      <object><%= link_to gravatar_for(@tweet.user, size: 50), @tweet.user %></object>
+      <object class="user ml-3"><%= link_to @tweet.user.name, @tweet.user %></object>
+      <object><%= render 'users/like_form' %></object>
+      <p class="content"><%= @tweet.content %></p>
+      <% if @tweet.pictures? %>
+        <% @tweet.pictures.each do |picture| %>
         <p><%= image_tag picture.to_s %></p>
         <% end %>
       <% end %>
       <span class="timestamp">
-        <%= time_ago_in_words(tweet.created_at) %>前に投稿
+        <%= time_ago_in_words(@tweet.created_at) %>前に投稿
       </span>
-      <% if current_user?(tweet.user) %>
+      <% if current_user?(@tweet.user) %>
         <object>
-              <%= link_to "削除", tweet, method: :delete,
+              <%= link_to "削除", @tweet, method: :delete,
                                               data: { confirm: "投稿を削除しますか?" } %>
         </object>
       <% end %>

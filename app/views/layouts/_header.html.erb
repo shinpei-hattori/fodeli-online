@@ -11,7 +11,7 @@
               アカウント
             </button>
             <div class="dropdown-menu">
-              <%= link_to 'プロフィール', current_user ,class: 'nav-link'%>
+              <%= link_to 'プロフィール', current_user ,class: 'nav-link', status: "ツイート履歴"%>
               <%= link_to '編集', edit_user_path(current_user) ,class: 'nav-link'%>
               <%= link_to 'ログアウト', logout_path ,method: :delete ,class: 'nav-link'%>
             </div>

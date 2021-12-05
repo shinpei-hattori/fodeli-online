@@ -192,6 +192,43 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_button 'フォローする'
         end
       end
+
+      context "お気に入り登録/解除" do
+        before do
+          login_for_system(user)
+        end
+
+        it "ツイートのいいね登録/解除ができること" do
+          expect(user.like?(tweet)).to be_falsey
+          user.like(tweet)
+          expect(user.like?(tweet)).to be_truthy
+          user.unlike(tweet)
+          expect(user.like?(tweet)).to be_falsey
+        end
+      end
+
+      context "セレクトボックスの選択によって動的にコンテンツが変化すること" do
+        let!(:like) { create(:like, user: user, tweet: tweet) }
+
+        before do
+          login_for_system(user)
+        end
+
+        it "デフォルトではツイート内容が表示されること" do
+          t = tweet
+          visit user_path(user)
+          expect(page).to have_content "ツイート (#{user.tweets.count})"
+          expect(page).to have_css "ul.tweets"
+          expect(page).to have_css "li#tweet-#{t.id}"
+        end
+        it "いいねしたツイートを選択すると、いいねしたツイート内容が表示されること", js: true do
+          visit user_path(user)
+          select "いいねしたツイート", from: "status"
+          expect(page).to have_content "いいねしたツイート (#{user.likes.count})"
+          expect(page).to have_css "ul.like-tweet"
+          expect(page).to have_css "li#tweet-#{like.tweet.id}"
+        end
+      end
     end
   end
 end

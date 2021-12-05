@@ -8,6 +8,7 @@ class User < ApplicationRecord
                                    foreign_key: "followed_id",
                                    dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :likes, dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -81,6 +82,21 @@ class User < ApplicationRecord
   # 現在のユーザーがフォローされていたらtrueを返す
   def followed_by?(other_user)
     followers.include?(other_user)
+  end
+
+  # ツイートにいいね登録する
+  def like(tweet)
+    Like.create!(user_id: id, tweet_id: tweet.id)
+  end
+
+  # ツイートのいいねを解除する
+  def unlike(tweet)
+    Like.find_by(user_id: id, tweet_id: tweet.id).destroy
+  end
+
+  # 現在のユーザーがいいね登録してたらtrueを返す
+  def like?(tweet)
+    !Like.find_by(user_id: id, tweet_id: tweet.id).nil?
   end
 
   private

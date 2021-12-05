@@ -1,0 +1,6 @@
+<%= link_to "/likes/#{@tweet.id}/destroy",
+            method: :delete,
+            class: 'unlike',
+            remote: true do %>
+  <div class="like-btn-unlike"><i class="fa fa-heart"></i><span id="like_count" class="ml-2"><%=@like_count%></span></div>
+<% end %>
