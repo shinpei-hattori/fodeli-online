@@ -1,11 +1,17 @@
 class Tweet < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   mount_uploaders :pictures, PictureUploader
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
+
+  # ツイートに付属するコメントのフィードを作成
+  def feed_comment(tweet_id)
+    Comment.where("tweet_id = ?", tweet_id)
+  end
 
   private
 

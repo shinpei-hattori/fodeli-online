@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "LikeSpec.rbs", type: :system do
+RSpec.describe "Likes", type: :system do
   let!(:user) { create(:user) }
   let!(:tweet) { create(:tweet, user: user) }
 
