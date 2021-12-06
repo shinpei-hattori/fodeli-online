@@ -16,6 +16,7 @@ ja:
     models:
       user: ユーザー
       tweet: ツイート
+      comment: コメント
     attributes:
       user:
         id: ID
@@ -34,6 +35,10 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
         pictures: 画像
+      comment:
+        user_id: コメント投稿者のID
+        tweet_id: コメントされたツイートのID
+        content: コメント
   date:
     abbr_day_names:
       - 日

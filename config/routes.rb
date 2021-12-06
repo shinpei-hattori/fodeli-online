@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   get :about,        to: 'static_pages#about'
   post   "likes/:tweet_id/create"  => "likes#create"
   delete "likes/:tweet_id/destroy" => "likes#destroy"
+  resources :comments, only: [:create, :destroy]
 
 end
