@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     @like_count = @tweet.likes.count
     @comment = Comment.new
-    @comments  = Kaminari.paginate_array(@tweet.feed_comment(@tweet.id)).page(params[:page]).per(5)
+    @comments = Kaminari.paginate_array(@tweet.feed_comment(@tweet.id)).page(params[:page]).per(5)
   end
 
   def create

@@ -54,9 +54,9 @@ RSpec.describe "ツイートのコメント機能", type: :request do
           login_for_request(other_user)
             expect {
              delete comment_path(comment)
-           }.not_to change(tweet.comments, :count)
-          end
+            }.not_to change(tweet.comments, :count)
         end
+      end
     end
 
     context "ログインしていない場合" do
