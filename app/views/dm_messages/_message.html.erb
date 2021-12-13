@@ -1,0 +1,21 @@
+<% messages = @messages %>
+<% if messages.present? %>
+  <% messages.each do |m| %>
+    <% if current_user?(m.user) %>
+      <div class="col-12">
+        <p class="message-box-own rounded p-3 m-0 float-right clearfix"><%= m.message%></p>
+      </div>
+      <div class="col-12 mb-2">
+        <%= link_to "削除", m, method: :delete,
+                                        data: { confirm: "本当に削除しますか?" },class: "float-right display-block",remote: true %>
+      </div>
+    <% else %>
+      <div class="col-2">
+        <%= link_to gravatar_for(m.user, size: 60, cl: "gravatar user-picture"), m.user%>
+      </div>
+      <div class="col-10">
+        <p class="message-box rounded p-3"><%= m.message%></p>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

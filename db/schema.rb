@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_05_221010) do
+ActiveRecord::Schema.define(version: 2021_12_07_065650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,30 @@ ActiveRecord::Schema.define(version: 2021_12_05_221010) do
     t.datetime "updated_at", null: false
     t.index ["tweet_id"], name: "index_comments_on_tweet_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "dm_entries", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "dm_room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dm_room_id"], name: "index_dm_entries_on_dm_room_id"
+    t.index ["user_id"], name: "index_dm_entries_on_user_id"
+  end
+
+  create_table "dm_messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "dm_room_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dm_room_id"], name: "index_dm_messages_on_dm_room_id"
+    t.index ["user_id"], name: "index_dm_messages_on_user_id"
+  end
+
+  create_table "dm_rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -88,5 +112,9 @@ ActiveRecord::Schema.define(version: 2021_12_05_221010) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "dm_entries", "dm_rooms"
+  add_foreign_key "dm_entries", "users"
+  add_foreign_key "dm_messages", "dm_rooms"
+  add_foreign_key "dm_messages", "users"
   add_foreign_key "tweets", "users"
 end

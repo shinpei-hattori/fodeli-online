@@ -17,6 +17,7 @@ ja:
       user: ユーザー
       tweet: ツイート
       comment: コメント
+      dm_message: メッセージ
     attributes:
       user:
         id: ID
@@ -39,6 +40,8 @@ ja:
         user_id: コメント投稿者のID
         tweet_id: コメントされたツイートのID
         content: コメント
+      dm_message:
+        message: メッセージ
   date:
     abbr_day_names:
       - 日
@@ -234,7 +237,7 @@ ja:
   time:
     am: 午前
     formats:
-      default: '%Y年%m月%d日(%a) %H時%M分%S秒 %z'
+      default: '%Y年%m月%d日(%a) %H時%M分'
       long: '%Y/%m/%d %H:%M'
       short: '%m/%d %H:%M'
     pm: 午後

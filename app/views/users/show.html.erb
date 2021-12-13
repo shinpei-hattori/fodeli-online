@@ -11,6 +11,22 @@
         <% if current_user == @user %>
           <div class="account-edit"><i class="fas fa-arrow-circle-right mr-2"></i><%= link_to "プロフィール編集", edit_user_path(@user) %></div>
         <% end %>
+        <!-- チャット -->
+        <% unless @user.id == current_user.id %>
+          <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
+            <% if @isRoom == true %>
+              <p class="user-show-room"><a href="/dm_rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
+            <% else %>
+              <%= form_with(model:@room) do |f| %>
+                <%= f.fields_for @entry do |e| %>
+                  <%= e.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat",id: "start-chat"%>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <!-- チャット -->
       </div>
     </div>
     <div class="col-md-8">
@@ -23,8 +39,6 @@
         <p class="show-user-head p-2 mb-3">自己紹介</p>
         <p class="pl-3"><%= @user.introduction %></p>
       </div>
-
-
     </div>
   </div>
   <div class="row">
@@ -36,16 +50,13 @@
           <%= hidden_field_tag :id, @user.id %>
           <%= select_tag :status, options_for_select(["ツイート履歴", "いいねしたツイート", "参加予定のオフ会","登録チャット"],@selected_status), class: "form-control select-drop" %>
         <% end %>
-
-
-
         <script>
           $(document).ready(function(){
             $(".select-drop").change(function(){
               $('#profile-status').submit();
             });
           });
-      </script>
+        </script>
       </div>
       <section id="like-tweet-group">
         <% if !@like_tweet.nil? %>

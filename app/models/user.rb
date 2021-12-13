@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :dm_messages, dependent: :destroy
+  has_many :dm_entry, class_name: "DmEntrie",foreign_key: "user_id", dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -45,6 +47,7 @@ class User < ApplicationRecord
     Tweet.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
   end
+
 
   # 永続セッションのためにユーザーをデータベースに記憶する
   def remember
