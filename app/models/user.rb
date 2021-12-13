@@ -48,6 +48,7 @@ class User < ApplicationRecord
                      OR user_id = :user_id", user_id: id)
   end
 
+
   # 永続セッションのためにユーザーをデータベースに記憶する
   def remember
     # 新しくトークンを作成。

@@ -3,5 +3,5 @@ class DmMessage < ApplicationRecord
   validates :dm_room_id, presence: true
   validates :message, presence: true, length: { maximum: 50 }
   belongs_to :user
-  belongs_to :dm_room
+  belongs_to :dm_room, touch: true
 end

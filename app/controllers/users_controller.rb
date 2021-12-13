@@ -100,6 +100,15 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def dmlists
+    @user = current_user
+    @entries = @user.dm_entry
+    if @entries.present?
+      @rooms = @entries.map(&:dm_room)
+      @rooms = @rooms.sort {|x, y| x.updated_at <=> y.updated_at }.reverse
+    end
+  end
+
   private
 
     # ユーザー新規作成時に許可する属性

@@ -7,6 +7,7 @@ RSpec.describe "dm_messages", type: :system do
   let!(:relationship1){create(:relationship,follower:user,followed:other_user)}
   let!(:relationship2){create(:relationship,follower:other_user,followed:user)}
   let!(:room) {create(:dm_room)}
+  let!(:room2) {create(:dm_room)}
   let!(:entry1) { create(:dm_entry,user:user,dm_room: room) }
   let!(:entry2) { create(:dm_entry,user:other_user,dm_room: room) }
 
@@ -98,6 +99,28 @@ RSpec.describe "dm_messages", type: :system do
           expect(page).not_to have_content "うどん食べたい"
           expect(page).to have_title full_title("個人チャット")
         end
+      end
+    end
+
+    context "個人チャット履歴ページ" do
+      before do
+        create(:dm_message,message: "うどん食べたい",user:user,dm_room:room)
+        create(:dm_message,message: "うなぎ食べたい",user:third,dm_room:room2)
+        create(:relationship,follower:user,followed:third)
+        create(:relationship,follower:third,followed:user)
+        create(:dm_entry,user:user,dm_room: room2)
+        create(:dm_entry,user:third,dm_room: room2)
+        login_for_system(user)
+        visit dmlists_user_path(user)
+      end
+
+      it "コンテンツが表示されているか" do
+        expect(page).to have_content "個人チャット履歴"
+        expect(page).to have_title full_title("個人チャット履歴")
+        expect(page).to have_content "うどん食べたい"
+        expect(page).to have_content "うなぎ食べたい"
+        expect(page).to have_content "#{other_user.name}"
+        expect(page).to have_content "#{third.name}"
       end
     end
 

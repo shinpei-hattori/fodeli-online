@@ -5,12 +5,13 @@
         <ul class="nav navbar-nav mr-auto">
           <li class="nav-item d-flex align-items-center"><i class="fas fa-book-open"></i><%= link_to '使い方', about_path ,class: 'nav-link ml-1'%></li>
         <% if logged_in? %>
-          <li class="d-flex align-items-center"><i class="fas fa-user"></i><%= link_to 'ユーザー一覧', users_path ,class: 'nav-link'  %></li>
+          <li class="d-flex align-items-center ml-2"><i class="fas fa-user"></i><%= link_to 'ユーザー一覧', users_path ,class: 'nav-link'  %></li>
+          <li class="d-flex align-items-center ml-2"><i class="fas fa-comment"></i><%= link_to '個人チャット履歴', dmlists_user_path(current_user) ,class: 'nav-link'  %></li>
           <div class="dropdown ml-2">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
               アカウント
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu ml-2">
               <%= link_to 'プロフィール', current_user ,class: 'nav-link', status: "ツイート履歴"%>
               <%= link_to '編集', edit_user_path(current_user) ,class: 'nav-link'%>
               <%= link_to 'ログアウト', logout_path ,method: :delete ,class: 'nav-link'%>

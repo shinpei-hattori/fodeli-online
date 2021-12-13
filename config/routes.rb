@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get :signup,       to: 'users#new'
   resources :users do
     member do
-      get :following, :followers
+      get :following, :followers, :dmlists
     end
   end
   resources :relationships, only: [:create, :destroy]
@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy]
   resources :dm_messages, only: [:create,:destroy]
   resources :dm_rooms, only: [:create,:show]
+
+
 
 end

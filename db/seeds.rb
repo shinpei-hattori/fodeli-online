@@ -28,3 +28,18 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+#個人チャット
+users = User.all
+user  = users.first
+10.times do |n|
+  DmRoom.create
+end
+rooms = DmRoom.all
+rooms.each_with_index do |a,i|
+  DmEntrie.create!(user: user,dm_room: a)
+  DmEntrie.create!(user: users[i+2],dm_room: a)
+  content = Faker::Lorem.sentence(word_count: 5)
+  DmMessage.create!(user: user,dm_room: a,message: content)
+  DmMessage.create!(user: users[i+2],dm_room: a,message: content)
+end

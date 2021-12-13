@@ -21,6 +21,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'faker'
 gem 'kaminari'
+gem 'i18n_generators'
 
 group :production do
  gem 'fog', '1.42'

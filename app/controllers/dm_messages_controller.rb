@@ -7,8 +7,9 @@ class DmMessagesController < ApplicationController
       @message = DmMessage.new(params.require(:dm_message).permit(:user_id, :message, :dm_room_id).merge(user_id: current_user.id))
       if @message.save
         @messages = @message.dm_room.dm_messages
+        # @message.dm_room.dm_entry.touch
         respond_to do |format|
-          format.html { dm_room_path(@message.dm_room) }
+          format.html { redirect_to dm_room_path(@message.dm_room) }
           format.js
         end
       else
@@ -23,7 +24,7 @@ class DmMessagesController < ApplicationController
     @messages = @room.dm_messages
     @message.destroy
     respond_to do |format|
-      format.html { dm_room_path(dm_room) }
+      format.html { redirect_to dm_room_path(@room) }
       format.js
     end
   end
