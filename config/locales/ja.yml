@@ -18,6 +18,7 @@ ja:
       tweet: ツイート
       comment: コメント
       dm_message: メッセージ
+      prefecture: 都道府県
     attributes:
       user:
         id: ID
@@ -42,6 +43,8 @@ ja:
         content: コメント
       dm_message:
         message: メッセージ
+      prefecture:
+        name: 県
   date:
     abbr_day_names:
       - 日

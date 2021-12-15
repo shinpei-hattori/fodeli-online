@@ -19,6 +19,5 @@ RSpec.describe DmEntrie, type: :model do
       entry.valid?
       expect(entry.errors[:dm_room_id]).to include("を入力してください")
     end
-
   end
 end

@@ -16,22 +16,22 @@ class UsersController < ApplicationController
     elsif @selected_status.nil?
       @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)
     end
-  # 以下DM機能のコード
-    #自分と相手がチャットルームにエントリーしているか確認
-    @currentUserEntry=DmEntrie.where(user_id: current_user.id)
-    @userEntry=DmEntrie.where(user_id: @user.id)
+    # 以下DM機能のコード
+    # 自分と相手がチャットルームにエントリーしているか確認
+    @current_user_entry = DmEntrie.where(user_id: current_user.id)
+    @user_entry = DmEntrie.where(user_id: @user.id)
     unless @user.id == current_user.id
-      if !@currentUserEntry.nil? && !@userEntry.nil?
-        @currentUserEntry.each do |cu|
-          @userEntry.each do |u|
-            if cu.dm_room_id == u.dm_room_id then
-              @isRoom = true
-              @roomId = cu.dm_room_id
+      if !@current_user_entry.nil? && !@user_entry.nil?
+        @current_user_entry.each do |cu|
+          @user_entry.each do |u|
+            if cu.dm_room_id == u.dm_room_id
+              @is_room = true
+              @room_id = cu.dm_room_id
             end
           end
         end
       end
-      unless @isRoom
+      unless @is_room
         @room = DmRoom.new
         @entry = DmEntrie.new
       end
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
     @entries = @user.dm_entry
     if @entries.present?
       @rooms = @entries.map(&:dm_room)
-      @rooms = @rooms.sort {|x, y| x.updated_at <=> y.updated_at }.reverse
+      @rooms = @rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
     end
   end
 

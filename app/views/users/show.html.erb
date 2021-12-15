@@ -14,8 +14,8 @@
         <!-- チャット -->
         <% unless @user.id == current_user.id %>
           <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
-            <% if @isRoom == true %>
-              <p class="user-show-room"><a href="/dm_rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
+            <% if @is_room == true %>
+              <p class="user-show-room"><a href="/dm_rooms/<%= @room_id %>" class="btn btn-primary btn-lg">チャットへ</a>
             <% else %>
               <%= form_with(model:@room) do |f| %>
                 <%= f.fields_for @entry do |e| %>

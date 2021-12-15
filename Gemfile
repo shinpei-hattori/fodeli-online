@@ -22,6 +22,7 @@ gem 'devise'
 gem 'faker'
 gem 'kaminari'
 gem 'i18n_generators'
+gem 'active_hash'
 
 group :production do
  gem 'fog', '1.42'

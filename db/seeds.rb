@@ -1,3 +1,7 @@
+Dir.glob(File.join(Rails.root, 'db', 'seeds', '*.rb')) do |file|
+  load(file)
+end
+
 User.create!(name:  "山田 太郎",
   email: "sample@example.com",
   password:              "foobar",
@@ -43,3 +47,4 @@ rooms.each_with_index do |a,i|
   DmMessage.create!(user: user,dm_room: a,message: content)
   DmMessage.create!(user: users[i+2],dm_room: a,message: content)
 end
+
