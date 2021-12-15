@@ -16,6 +16,8 @@ class DmMessagesController < ApplicationController
         flash[:danger] = @message.errors.full_messages
         redirect_to dm_room_path(@message.dm_room)
       end
+    else
+      redirect_to root_url
     end
   end
 
