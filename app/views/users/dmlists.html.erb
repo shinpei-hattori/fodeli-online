@@ -5,7 +5,7 @@
   </aside>
   <section class="col-md-8">
     <ul class="list-group">
-      <% if @rooms.any? %>
+      <% if @rooms.present? %>
         <% @rooms.each do |r| %>
           <li class="list-group-item p-0">
             <%= link_to(r,class: "d-block tweet-link") do %>
