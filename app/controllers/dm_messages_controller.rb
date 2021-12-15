@@ -1,6 +1,6 @@
 class DmMessagesController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_user,only: [:destroy]
+  before_action :correct_user, only: [:destroy]
   def create
     # debugger
     if DmEntrie.where(user_id: current_user.id, dm_room_id: params[:dm_message][:dm_room_id]).present?
@@ -30,6 +30,7 @@ class DmMessagesController < ApplicationController
   end
 
   private
+
   def correct_user
     @message = current_user.dm_messages.find_by(id: params[:id])
     redirect_to root_url if @message.nil?

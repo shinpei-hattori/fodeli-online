@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :area do
-    city "MyString"
+    city "市町村"
     prefecture_id 1
   end
 end

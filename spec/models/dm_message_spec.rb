@@ -31,6 +31,5 @@ RSpec.describe DmMessage, type: :model do
       message.valid?
       expect(message.errors[:message]).to include("は50文字以内で入力してください")
     end
-
   end
 end

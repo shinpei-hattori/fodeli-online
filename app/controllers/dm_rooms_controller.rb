@@ -1,6 +1,6 @@
 class DmRoomsController < ApplicationController
   before_action :logged_in_user
-  before_action :Authority , only: [:show]
+  before_action :Authority, only: [:show]
 
   def create
     @room = DmRoom.create
@@ -11,7 +11,7 @@ class DmRoomsController < ApplicationController
 
   def show
     @room = DmRoom.find(params[:id])
-    if DmEntrie.where(user_id: current_user.id,dm_room_id: @room.id).present?
+    if DmEntrie.where(user_id: current_user.id, dm_room_id: @room.id).present?
       @messages = @room.dm_messages
       @message = DmMessage.new
       @entries = @room.dm_entry
@@ -28,12 +28,12 @@ class DmRoomsController < ApplicationController
   end
 
   private
+
     def Authority
-      check = DmEntrie.find_by(dm_room_id: params[:id],user_id: current_user.id)
+      check = DmEntrie.find_by(dm_room_id: params[:id], user_id: current_user.id)
       unless check
         redirect_to root_url
         flash[:danger] = "権限がありません"
       end
     end
-
 end
