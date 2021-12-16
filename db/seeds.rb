@@ -48,3 +48,11 @@ rooms.each_with_index do |a,i|
   DmMessage.create!(user: users[i+2],dm_room: a,message: content)
 end
 
+# フードデリバリー会社作成
+
+c = [
+  "Uber Eats","出前館","DiDi Food","menu",
+  "Chompy","Wolt","foodpanda","DOORDASH"
+]
+c.each { |n| Company.create!(name: n)}
+

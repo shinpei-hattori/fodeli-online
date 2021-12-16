@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :dm_messages, dependent: :destroy
   has_many :dm_entry, class_name: "DmEntrie", dependent: :destroy
+  has_many :chat_users, dependent: :destroy
+  has_many :chat_posts, dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }

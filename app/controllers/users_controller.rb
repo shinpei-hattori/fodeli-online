@@ -107,6 +107,7 @@ class UsersController < ApplicationController
       @rooms = @entries.map(&:dm_room)
       @rooms = @rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
     end
+    # debugger
   end
 
   private

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'chat_posts/create'
+  get 'chat_posts/destroy'
+  # get 'chat_rooms/create'
+  # get 'chat_rooms/show'
+  # get 'chat_room/create'
+  # get 'chat_room/show'
   get    :login,     to: 'sessions#new'
   post   :login,     to: 'sessions#create'
   delete :logout,    to: 'sessions#destroy'
@@ -16,7 +22,9 @@ Rails.application.routes.draw do
   delete "likes/:tweet_id/destroy" => "likes#destroy"
   resources :comments, only: [:create, :destroy]
   resources :dm_messages, only: [:create,:destroy]
-  resources :dm_rooms, only: [:create,:show]
+  resources :dm_rooms, only: [:index,:create,:show]
+  resources :chat_rooms, only: [:index,:create,:show]
+  resources :chat_posts, only: [:create,:show]
 
 
 

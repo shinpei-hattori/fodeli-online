@@ -1,0 +1,110 @@
+
+<%= form_with(url: chat_rooms_path,scope: :session,id: "chat", local: true) do |f| %>
+<%= hidden_field_tag :city, "aaaa" %>
+<div class="container">
+
+  <%= select_tag 'company', options_for_select(["Uber Eats","出前館","DiDi Food","menu","Chompy","Wolt","foodpanda","DOORDASH"]), id: 'company',class: "form-control inputstl" %>
+    <section class="row">
+      <p class="col-12">東北</p>
+      <% @tohoku.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <% p.areas.each do |a| %>
+          <p class="dropdown-item"><%= a.city %></p>
+          <% end %>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12">関東</p>
+      <% @kanto.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12">中部</p>
+      <% @tyubu.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12">近畿</p>
+      <% @kinki.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12">中国</p>
+      <% @china.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12">四国</p>
+      <% @shikoku.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12">九州</p>
+      <% @kyusyu.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+      <% end%>
+    </section>
+  </div>
+  <% end %>
+<script>
+  $(".dropdown-item").click(function(){
+  var city = $(this).text();
+  $('input:hidden[name="city"]').val(city);
+  $('#chat').submit();
+
+});
+
+</script>
