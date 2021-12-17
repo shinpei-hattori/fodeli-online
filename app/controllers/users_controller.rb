@@ -107,7 +107,15 @@ class UsersController < ApplicationController
       @rooms = @entries.map(&:dm_room)
       @rooms = @rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
     end
-    # debugger
+  end
+
+  def chatlists
+    @user = current_user
+    @entries = @user.chat_users
+    if @entries.present?
+      @rooms = @entries.map(&:chat_room)
+      @rooms = @rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
+    end
   end
 
   private

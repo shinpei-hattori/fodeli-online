@@ -1,98 +1,113 @@
 
+<% provide(:title, "チャット検索") %>
 <%= form_with(url: chat_rooms_path,scope: :session,id: "chat", local: true) do |f| %>
 <%= hidden_field_tag :city, "aaaa" %>
 <div class="container">
 
-  <%= select_tag 'company', options_for_select(["Uber Eats","出前館","DiDi Food","menu","Chompy","Wolt","foodpanda","DOORDASH"]), id: 'company',class: "form-control inputstl" %>
-    <section class="row">
-      <p class="col-12">東北</p>
+  <section class="row mt-5">
+    </label>
+      <h4 class="col-12 mb-5 company-head p-3 pl-5"><label for="company">会社を選んでください</label></h4>
+      <%= select_tag 'company', options_for_select(["Uber Eats","出前館","DiDi Food","menu","Chompy","Wolt","foodpanda","DOORDASH"]), id: 'company',class: "form-control inputstl col-5 mb-5" %>
+      <h4 class="col-12 mb-5 area-head p-3 pl-5">エリアを選んでください</h4>
+      <p class="col-12 border-bottom">北海道地方</p>
+      <div class="dropdown p-2">
+        <button class="btn dropdown-toggle hokkaido" type="button" id="hokkaido" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= @hokkaido.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="hokkaido">
+          <% @hokkaido.areas.each do |a| %>
+          <a class="dropdown-item" id="tanaka"><%= a.city %></a>
+          <% end %>
+        </div>
+      </div>
+      <p class="col-12 border-bottom">東北地方</p>
       <% @tohoku.each do |p| %>
       <div class="dropdown p-2">
-        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn tohoku dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= p.name %>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <% p.areas.each do |a| %>
-          <p class="dropdown-item"><%= a.city %></p>
+          <a class="dropdown-item"><%= a.city %></a>
           <% end %>
         </div>
       </div>
       <% end%>
-      <p class="col-12">関東</p>
+      <p class="col-12 border-bottom">関東地方</p>
       <% @kanto.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn kanto dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <% p.areas.each do |a| %>
+          <a class="dropdown-item"><%= a.city %></a>
+          <% end %>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12 border-bottom">中部地方</p>
+      <% @tyubu.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn tyubu dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <% p.areas.each do |a| %>
+          <a class="dropdown-item"><%= a.city %></a>
+          <% end %>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12 border-bottom">近畿地方</p>
+      <% @kinki.each do |p| %>
+      <div class="dropdown p-2">
+        <button class="btn kinki dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= p.name %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <% p.areas.each do |a| %>
+          <a class="dropdown-item"><%= a.city %></a>
+          <% end %>
+        </div>
+      </div>
+      <% end%>
+      <p class="col-12 border-bottom">中国地方</p>
+      <% @china.each do |p| %>
       <div class="dropdown p-2">
         <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= p.name %>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <% p.areas.each do |a| %>
+          <a class="dropdown-item"><%= a.city %></a>
+          <% end %>
         </div>
       </div>
       <% end%>
-      <p class="col-12">中部</p>
-      <% @tyubu.each do |p| %>
-      <div class="dropdown p-2">
-        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= p.name %>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div>
-      <% end%>
-      <p class="col-12">近畿</p>
-      <% @kinki.each do |p| %>
-      <div class="dropdown p-2">
-        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= p.name %>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div>
-      <% end%>
-      <p class="col-12">中国</p>
-      <% @china.each do |p| %>
-      <div class="dropdown p-2">
-        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= p.name %>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div>
-      <% end%>
-      <p class="col-12">四国</p>
+      <p class="col-12 border-bottom">四国地方</p>
       <% @shikoku.each do |p| %>
       <div class="dropdown p-2">
-        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn shikoku dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= p.name %>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <% p.areas.each do |a| %>
+          <a class="dropdown-item"><%= a.city %></a>
+          <% end %>
         </div>
       </div>
       <% end%>
-      <p class="col-12">九州</p>
+      <p class="col-12 border-bottom">九州地方</p>
       <% @kyusyu.each do |p| %>
       <div class="dropdown p-2">
-        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn kyusyu dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= p.name %>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <% p.areas.each do |a| %>
+          <a class="dropdown-item"><%= a.city %></a>
+          <% end %>
         </div>
       </div>
       <% end%>

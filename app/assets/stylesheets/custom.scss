@@ -295,10 +295,6 @@ input {
 }
 
 // 個人チャット
-// .chat-user-name {
-//   background-color: #ccffcc;
-//   border-left: 5px solid #ccff66;
-// }
 
 .chat-user-name {
   position: relative;
@@ -365,4 +361,129 @@ input {
 
 .chat-head {
   color: #ccffcc;
+}
+
+// チャット検索画面
+.company-head {
+  position: relative;
+  background: #eff4ff;
+  // padding: 2px 5px 2px 40px;
+  // margin-left: 20px;
+  font-size: 20px;
+  color: #474747;
+  border-radius: 0 10px 10px 0;
+}
+
+.company-head:before {
+  font-family: 'Font Awesome 5 Free';
+  content: '\f1ad';
+  display: inline-block;
+  line-height: 40px;
+  position: absolute;
+  padding: 0em;
+  color: white;
+  background: #81a1e4;
+  font-weight: 900;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border-radius: 50%;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 2px #4967b4;
+}
+
+.area-head {
+  position: relative;
+  background: #eff4ff;
+  // padding: 2px 5px 2px 40px;
+  // margin-left: 20px;
+  font-size: 20px;
+  color: #474747;
+  border-radius: 0 10px 10px 0;
+}
+
+.area-head:before {
+  font-family: 'Font Awesome 5 Free';
+  content: '\f3c5';
+  display: inline-block;
+  line-height: 40px;
+  position: absolute;
+  padding: 0em;
+  color: white;
+  background: #81a1e4;
+  font-weight: 900;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border-radius: 50%;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 2px #4967b4;
+}
+
+.hokkaido {
+  background-color: #8a2be2;
+  color: #fff;
+}
+
+.tohoku {
+  background-color: #4967b4;
+  color: #fff;
+}
+
+.kanto {
+  background-color: #3cb371;
+  color: #fff;
+}
+
+.tyubu {
+  background-color: #6b8e23;
+  color: #fff;
+}
+.kinki {
+  background-color: #f4a460;
+  color: #fff;
+}
+
+.shikoku {
+  background-color: #db7093;
+  color: #fff;
+}
+
+.kyusyu {
+  background-color: #b22222;
+  color: #fff;
+}
+
+// チャットルーム
+
+.chat-area-head {
+  text-align: center;
+  line-height: 1.5em;
+  background-color: #ccffcc;
+  color: #0066cc;
+  border-radius: 10px;
+  text-shadow: 1px 2px 3px #808080;
+}
+
+//
+.chat-list {
+  color: #404040;
+  border-left: solid 6px #1fa67a; /*左側の線*/
+  border-bottom: solid 2px #dadada; /*下に灰色線*/
+  background: whitesmoke;
+  margin-bottom: 5px; /*下のバーとの余白*/
+  line-height: 1.5;
+  padding: 0.5em;
+  list-style-type: none !important; /*ポチ消す*/
+  font-weight: bold;
 }

@@ -6,7 +6,17 @@
           <li class="nav-item d-flex align-items-center"><i class="fas fa-book-open"></i><%= link_to '使い方', about_path ,class: 'nav-link ml-1'%></li>
         <% if logged_in? %>
           <li class="d-flex align-items-center ml-2"><i class="fas fa-user"></i><%= link_to 'ユーザー一覧', users_path ,class: 'nav-link'  %></li>
-          <li class="d-flex align-items-center ml-2"><i class="fas fa-comment"></i><%= link_to '個人チャット履歴', dmlists_user_path(current_user) ,class: 'nav-link'  %></li>
+          <!-- <li class="d-flex align-items-center ml-2"><i class="fas fa-comment"></i></li> -->
+          <div class="dropdown ml-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+              チャット
+            </button>
+            <div class="dropdown-menu ml-2">
+              <%= link_to 'チャットを探す', chat_rooms_path ,class: 'nav-link'%>
+              <%= link_to '個人チャット履歴', dmlists_user_path(current_user) ,class: 'nav-link'  %>
+              <%= link_to '参加チャット', chatlists_user_path(current_user) ,class: 'nav-link'%>
+            </div>
+          </div>
           <div class="dropdown ml-2">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
               アカウント

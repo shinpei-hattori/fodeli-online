@@ -1,17 +1,17 @@
 class ChatRoomsController < ApplicationController
   before_action :logged_in_user
-  before_action :Authority, only: [:show]
+  before_action :Authority, only: [:show,:destroy]
 
 
   def index
-    @pref = Prefecture.all
-    @tohoku = @pref[2..7]
-    @kanto = @pref[8..14]
-    @tyubu = @pref[15..23]
-    @kinki = @pref[24..30]
-    @china = @pref[31..35]
-    @shikoku = @pref[36..39]
-    @kyusyu = @pref[40..48]
+    @hokkaido = Prefecture.find_by(name: "北海道")
+    @tohoku = Prefecture.where(name: ['青森県' ,'岩手県' , '宮城県' ,  '秋田県' ,'山形県' , '福島県'])
+    @kanto = Prefecture.where(name: ['茨城県' ,'栃木県' , '群馬県' , '埼玉県' ,'千葉県' , '東京都' ,  '神奈川県'])
+    @tyubu = Prefecture.where(name: ['新潟県' , '富山県' , '石川県' ,'福井県' , '山梨県' , '長野県' ,'岐阜県' ,'静岡県' , '愛知県'])
+    @kinki = Prefecture.where(name: ['三重県' , '滋賀県' ,  '京都府' ,'大阪府' , '兵庫県' ,'奈良県' ,'和歌山県'])
+    @china = Prefecture.where(name: ['鳥取県' , '島根県' ,'岡山県' ,  '広島県' ,  '山口県'])
+    @shikoku = Prefecture.where(name: ['徳島県' , '香川県' , '愛媛県' ,'高知県'])
+    @kyusyu = Prefecture.where(name: ['福岡県' ,'佐賀県' ,'長崎県' , '熊本県' , '大分県' ,'宮崎県' , '鹿児島県' ,'沖縄県'])
   end
 
   def create
@@ -40,20 +40,39 @@ class ChatRoomsController < ApplicationController
     @company = Company.find(@room.company_id)
     @area = Area.find(@room.area_id)
     if ChatUser.find_by(user_id: current_user.id, chat_room_id: @room.id).present?
-      # @messages = @room.dm_messages
-      # @message = DmMessage.new
+      @messages = @room.chat_posts
+      @message = ChatPost.new
       @users = @room.chat_users
       @post = ChatPost.new
+
     else
       redirect_back(fallback_location: root_path)
     end
   end
 
+  def destroy
+    # ルームの削除ではなく、チャットユーザーを削除するアクション
+    room = ChatRoom.find(params[:id])
+    chat_user = ChatUser.find_by(chat_room_id: params[:id], user_id: current_user.id)
+    if chat_user.present?
+      chat_user.destroy
+      flash[:success] = "ルームを退出しました"
+      if request.referrer.include?(chat_room_path(room))
+        redirect_to root_url
+      else
+        redirect_back(fallback_location: root_path)
+      end
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  private
   def Authority
     check = ChatUser.find_by(chat_room_id: params[:id], user_id: current_user.id)
     unless check
       redirect_to root_url
-      flash[:danger] = "権限がありません"
+      flash[:danger] = "kkkk権限がありません"
     end
   end
 end
