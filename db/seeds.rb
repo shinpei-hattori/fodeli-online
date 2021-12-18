@@ -56,3 +56,20 @@ c = [
 ]
 c.each { |n| Company.create!(name: n)}
 
+# チャットルームとメッセージ作成
+company = Company.where(name: ["Uber Eats","出前館"])
+areas = Area.where(city: ["さいたま市","市川市","渋谷区","横浜市"])
+users = User.all[2..15]
+user = User.first
+company.each do |c|
+  areas.each do |a|
+    content = Faker::Lorem.sentence(word_count: 5)
+    room = ChatRoom.create!(company: c,area: a)
+    ChatUser.create!(user: user,chat_room: room)
+    user.chat_posts.create!(chat_room: room,message: content)
+    users.each do |u|
+      ChatUser.create!(user: u,chat_room: room)
+      u.chat_posts.create!(chat_room: room,message: content)
+    end
+  end
+end

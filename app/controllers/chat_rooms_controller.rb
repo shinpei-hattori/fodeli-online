@@ -57,7 +57,7 @@ class ChatRoomsController < ApplicationController
     if chat_user.present?
       chat_user.destroy
       flash[:success] = "ルームを退出しました"
-      if request.referrer.include?(chat_room_path(room))
+      if !request.referrer.nil? && request.referrer.include?(chat_room_path(room))
         redirect_to root_url
       else
         redirect_back(fallback_location: root_path)
@@ -72,7 +72,7 @@ class ChatRoomsController < ApplicationController
     check = ChatUser.find_by(chat_room_id: params[:id], user_id: current_user.id)
     unless check
       redirect_to root_url
-      flash[:danger] = "kkkk権限がありません"
+      flash[:danger] = "権限がありません"
     end
   end
 end

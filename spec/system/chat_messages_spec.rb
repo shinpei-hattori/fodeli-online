@@ -32,7 +32,7 @@ RSpec.describe "ChatMessages", type: :system do
         login_for_system(user)
         visit chat_rooms_path
       end
-      it "レイアウト" do
+      it "正しいレイアウトが表示されていること" do
         @pref.each do |n|
           unless n == '---'
             expect(page).to have_button n
@@ -62,6 +62,18 @@ RSpec.describe "ChatMessages", type: :system do
         login_for_system(user)
         visit chat_room_path(@room)
       end
+      context "ルーム退出処理" do
+        it "退出リンクがあること" do
+          expect(page).to have_link "退出" , href: chat_room_path(@room)
+        end
+
+        it "退出をクリックするとホーム画面にリダイレクトされること" do
+          click_link "退出"
+          expect(page).to have_content "ルームを退出しました"
+          expect(page).to have_title full_title
+          expect(page).to have_content "みんなのツイート"
+        end
+      end
 
       context "メッセージの投稿" do
         it "投稿ができ、削除リンクが表示されること" do
@@ -90,6 +102,30 @@ RSpec.describe "ChatMessages", type: :system do
           expect(page).not_to have_content 'カレー食べたい'
         end
       end
+    end
+
+    context "参加チャット画面" do
+      before do
+        login_for_system(user)
+        visit chatlists_user_path(user)
+      end
+
+      it "正しいレイアウトが表示されていること" do
+        expect(page).to have_title full_title("参加中チャット")
+        expect(page).to have_content "参加中チャット"
+        expect(page).to have_content @room.company.name
+        expect(page).to have_content @room.area.city
+        expect(page).to have_link "退出" , href: chat_room_path(@room)
+      end
+
+      it "退出をクリックすると参加チャットからルームが表示されなくなること" do
+        click_link "退出"
+        expect(page).to have_content "ルームを退出しました"
+        expect(page).not_to have_content @room.company.name
+        expect(page).not_to have_content @room.area.city
+        expect(page).not_to have_link "退出" , href: chat_room_path(@room)
+      end
+
     end
 
   end

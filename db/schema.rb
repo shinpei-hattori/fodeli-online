@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_215131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_room_id"], name: "index_chat_posts_on_chat_room_id"
+    t.index ["user_id", "chat_room_id"], name: "index_chat_posts_on_user_id_and_chat_room_id"
     t.index ["user_id"], name: "index_chat_posts_on_user_id"
   end
 

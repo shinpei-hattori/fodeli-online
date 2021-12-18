@@ -7,4 +7,5 @@ class CreateChatPosts < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     add_index :chat_posts,[:user_id,:chat_room_id]
+  end
 end
