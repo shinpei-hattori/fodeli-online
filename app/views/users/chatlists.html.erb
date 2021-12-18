@@ -1,0 +1,28 @@
+<% provide(:title, "参加中チャット") %>
+<div class="row mt-5">
+  <aside class="col-md-4">
+      <h4 class="chat-user-name"><i class="fas fa-comment mr-2 chat-head"></i>参加中チャット</h4>
+  </aside>
+  <section class="col-md-8">
+    <ul class="list-group">
+      <% if @rooms.present? %>
+        <% @rooms.each do |r| %>
+          <li class="list-group-item p-0 chat-list">
+            <%= link_to(r,class: "d-block tweet-link") do %>
+            <div class="row m-0 p-2">
+              <div class="col-10">
+                <p class="text-info"><%= r.company.name %></p>
+                <p class="m-0"><%= r.area.city %>のチャット</p>
+              </div>
+              <object class="col-2">
+                <%= link_to "退出", r, method: :delete,
+                                                data: { confirm: "ルームを退出しますか?" } %>
+              </object>
+            </div>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </section>
+</div>

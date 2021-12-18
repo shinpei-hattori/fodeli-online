@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get :signup,       to: 'users#new'
   resources :users do
     member do
-      get :following, :followers, :dmlists
+      get :following, :followers, :dmlists ,:chatlists
     end
   end
   resources :relationships, only: [:create, :destroy]
@@ -16,8 +16,7 @@ Rails.application.routes.draw do
   delete "likes/:tweet_id/destroy" => "likes#destroy"
   resources :comments, only: [:create, :destroy]
   resources :dm_messages, only: [:create,:destroy]
-  resources :dm_rooms, only: [:create,:show]
-
-
-
+  resources :dm_rooms, only: [:index,:create,:show]
+  resources :chat_rooms, only: [:index,:create,:show,:destroy]
+  resources :chat_posts, only: [:create,:destroy]
 end

@@ -109,6 +109,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def chatlists
+    @user = current_user
+    @entries = @user.chat_users
+    if @entries.present?
+      @rooms = @entries.map(&:chat_room)
+      @rooms = @rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
+    end
+  end
+
   private
 
     # ユーザー新規作成時に許可する属性

@@ -2,6 +2,10 @@ class DmRoomsController < ApplicationController
   before_action :logged_in_user
   before_action :Authority, only: [:show]
 
+  def index
+    @chat_room = ChatRoom.new
+  end
+
   def create
     @room = DmRoom.create
     @entry1 = DmEntrie.create(dm_room_id: @room.id, user_id: current_user.id)
