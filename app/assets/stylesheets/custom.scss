@@ -487,3 +487,11 @@ input {
   list-style-type: none !important; /*ポチ消す*/
   font-weight: bold;
 }
+
+// tuuti
+.notification-li {
+  background-color: #fafafa;
+  strong {
+    color: #4a9e91;
+  }
+}

@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   resources :dm_rooms, only: [:index,:create,:show]
   resources :chat_rooms, only: [:index,:create,:show,:destroy]
   resources :chat_posts, only: [:create,:destroy]
+  resources :notifications, only: :index
 end

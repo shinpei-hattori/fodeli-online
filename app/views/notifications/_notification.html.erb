@@ -1,0 +1,40 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<li class="list-group-item notification-li">
+  <p>
+    <%= link_to visitor do%>
+      <%=gravatar_for(visitor, size: 25,cl: "mr-1 user-picture") %><strong><%=visitor.name %></strong>
+    <% end %>
+
+    さんが
+    <% case notification.action %>
+    <% when 'follow' then %>
+      <%=link_to visited  do %>
+        <strong>あなた</strong>
+      <% end %>
+
+      <span>をフォローしました</span>
+    <% when 'like' then %>
+      <%=link_to notification.tweet do %>
+        <strong>あなたの投稿</strong>
+      <% end %>
+
+      いいねしました
+    <% when 'comment' then %>
+
+      <% if notification.tweet.user_id == visited.id %>
+        <%= link_to notification.tweet do %>
+          <strong>あなたの投稿</strong>
+        <% end %>
+      <% else %>
+        <%= link_to notification.tweet do %>
+          <%=gravatar_for(notification.tweet.user, size: 25,cl: "mr-1 user-picture") %>
+          <strong><%=notification.tweet.user.name%>さんの投稿</strong>
+        <% end %>
+      <% end %>
+        にコメントしました
+    <% end %>
+  </p>
+
+</li>

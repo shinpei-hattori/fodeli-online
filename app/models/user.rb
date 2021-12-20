@@ -14,6 +14,12 @@ class User < ApplicationRecord
   has_many :dm_entry, class_name: "DmEntrie", dependent: :destroy
   has_many :chat_users, dependent: :destroy
   has_many :chat_posts, dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification',
+                                  foreign_key: 'visitor_id',
+                                  dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification',
+                                   foreign_key: 'visited_id',
+                                   dependent: :destroy
   attr_accessor :remember_token
   before_save :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
@@ -102,6 +108,18 @@ class User < ApplicationRecord
   # 現在のユーザーがいいね登録してたらtrueを返す
   def like?(tweet)
     !Like.find_by(user_id: id, tweet_id: tweet.id).nil?
+  end
+
+  # フォローした際に通知を作成
+  def create_notification_follow!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
   end
 
   private
