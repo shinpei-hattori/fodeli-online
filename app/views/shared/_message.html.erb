@@ -1,20 +1,30 @@
 <% messages = @messages %>
+
+
 <% if messages.present? %>
   <% messages.each do |m| %>
+    <%if @first_post_time.include?(m.created_at) == true %>
+      <div class="col-12 text-center mb-3">
+        <span class="p-2 chat-date"><%= m.post_datetime %></span>
+      </div>
+    <% end %>
     <% if current_user?(m.user) %>
-      <div class="col-12">
-        <p class="message-box-own rounded p-3 m-0 float-right clearfix"><%= m.message%></p>
+      <div class="col-12 d-flex justify-content-end position-relative mb-3">
+        <span class="align-self-end timestamp mr-2"><%= m.created_at.strftime('%H:%M') %></span>
+        <p class="message-box-own rounded p-3 m-0"><%= m.message%></p>
+        <%= link_to  m, method: :delete,data: { confirm: "本当に削除しますか?" },class: "position-absolute chat-delete",id: "chat-delete",remote: true do %>
+          <i class="fas fa-times-circle"></i>
+        <% end %>
       </div>
-      <div class="col-12 mb-2">
-        <%= link_to "削除", m, method: :delete,
-                                        data: { confirm: "本当に削除しますか?" },class: "float-right display-block",remote: true %>
-      </div>
+      <!-- <div class="col-12 mb-2">
+      </div> -->
     <% else %>
-      <div class="col-2">
-        <%= link_to gravatar_for(m.user, size: 60, cl: "gravatar user-picture"), m.user%>
-      </div>
-      <div class="col-10">
-        <p class="message-box rounded p-3"><%= m.message%></p>
+      <!-- <div class="col-2">
+      </div> -->
+      <div class="col-12 d-flex mb-3">
+        <%= link_to gravatar_for(m.user, size: 50, cl: "gravatar user-picture"), m.user%>
+        <p class="message-box rounded p-3 m-0 ml-3"><%= m.message%></p>
+        <span class="align-self-end ml-2 timestamp"><%= m.created_at.strftime('%H:%M') %></span>
       </div>
     <% end %>
   <% end %>

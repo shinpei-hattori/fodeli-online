@@ -17,6 +17,14 @@ class DmRoomsController < ApplicationController
     @room = DmRoom.find(params[:id])
     if DmEntrie.where(user_id: current_user.id, dm_room_id: @room.id).present?
       @messages = @room.dm_messages
+      # チャット日付作成
+      post_dates = @messages.group_by{|post_date| post_date.created_at.to_date}
+      @first_post_time = []
+      post_dates.each do |pd|
+        first_pd = pd.flatten[1]
+        @first_post_time << first_pd.created_at
+      end
+      # ここまで
       @message = DmMessage.new
       @entries = @room.dm_entry
       @room.dm_entry.each do |u|
