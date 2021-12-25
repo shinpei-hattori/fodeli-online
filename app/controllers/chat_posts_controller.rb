@@ -5,13 +5,21 @@ class ChatPostsController < ApplicationController
     if ChatUser.find_by(user_id: current_user.id, chat_room_id: params[:chat_post][:chat_room_id]).present?
       @message = ChatPost.new(params.require(:chat_post).permit(:user_id, :message, :chat_room_id).merge(user_id: current_user.id))
       if @message.save
+        # 通知作成
+        @message.create_notification_chat_post!(current_user)
         @messages = @message.chat_room.chat_posts
+        # チャット日付作成
+        post_dates = @messages.group_by { |post_date| post_date.created_at.to_date }
+        @first_post_time = []
+        post_dates.each do |pd|
+          first_pd = pd.flatten[1]
+          @first_post_time << first_pd.created_at
+        end
+        # ここまで
         respond_to do |format|
           format.html { redirect_to chat_room_path(@message.chat_room) }
           format.js
         end
-        # debugger
-        # redirect_to chat_room_path(@message.chat_room)
       else
         flash[:danger] = @message.errors.full_messages
         redirect_to chat_room_path(@message.chat_room)
@@ -25,6 +33,14 @@ class ChatPostsController < ApplicationController
     @room = @message.chat_room
     @messages = @room.chat_posts
     @message.destroy
+    # チャット日付作成
+    post_dates = @messages.group_by { |post_date| post_date.created_at.to_date }
+    @first_post_time = []
+    post_dates.each do |pd|
+      first_pd = pd.flatten[1]
+      @first_post_time << first_pd.created_at
+    end
+    # ここまで
     respond_to do |format|
       format.html { redirect_to chat_room_path(@room) }
       format.js

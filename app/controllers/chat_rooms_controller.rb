@@ -40,10 +40,16 @@ class ChatRoomsController < ApplicationController
     @area = Area.find(@room.area_id)
     if ChatUser.find_by(user_id: current_user.id, chat_room_id: @room.id).present?
       @messages = @room.chat_posts
+      # チャット日付作成
+      post_dates = @messages.group_by { |post_date| post_date.created_at.to_date }
+      @first_post_time = []
+      post_dates.each do |pd|
+        first_pd = pd.flatten[1]
+        @first_post_time << first_pd.created_at
+      end
+      # ここまで
       @message = ChatPost.new
       @users = @room.chat_users
-      @post = ChatPost.new
-
     else
       redirect_back(fallback_location: root_path)
     end

@@ -9,16 +9,16 @@ RSpec.describe "ユーザーフォロー機能", type: :request do
       login_for_request(user)
     end
 
-    it "ユーザーのフォローができること" do
+    it "ユーザーのフォローと通知登録ができること" do
       expect {
         post relationships_path, params: { followed_id: other_user.id }
-      }.to change(user.following, :count).by(1)
+      }.to change(user.following, :count).by(1).and change(Notification, :count).by(1)
     end
 
-    it "ユーザーのAjaxによるフォローができること" do
+    it "ユーザーのAjaxによるフォローと通知登録ができること" do
       expect {
         post relationships_path, xhr: true, params: { followed_id: other_user.id }
-      }.to change(user.following, :count).by(1)
+      }.to change(user.following, :count).by(1).and change(Notification, :count).by(1)
     end
 
     it "ユーザーのアンフォローができること" do

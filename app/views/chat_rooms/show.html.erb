@@ -1,6 +1,6 @@
 <% provide(:title, "#{@area.city}のチャット") %>
 <div class="row mt-5">
-  <div class="col-md-4">
+  <div class="col-lg-4">
     <h3 class="chat-area-head shadow-sm p-3 rounded"><%= @company.name %><br><%= @area.city %>のチャット</h3>
     <p class="border-bottom">参加ユーザー</p>
     <% if @users.any? %>
@@ -14,7 +14,7 @@
                                                 data: { confirm: "ルームを退出しますか?" } %>
   </div>
   <hr>
-  <div class="chats col-md-8 pl-5 pr-5 pt-5">
+  <div class="chats col-lg-8 pl-5 pr-5 pt-5">
     <!--チャットコメント部分-->
     <div class="row" id="chat-content">
       <%= render('shared/message') %>
@@ -24,8 +24,8 @@
       <%= form_with(model:@message) do |f| %>
         <%= f.hidden_field :chat_room_id, value: @room.id %>
         <div class="row">
-          <div class="col-md-8"><%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field" %></div>
-          <div class="col-md-4"><%= f.submit "投稿",class: 'form-submit'%></div>
+          <div class="col-lg-10"><%= f.text_field :message, placeholder: "メッセージを入力して下さい" , size: 70, class:"form-text-field form-control" %></div>
+          <div class="col-lg-2"><%= f.submit "投稿",class: 'btn btn-primary form-submit'%></div>
         </div>
       <% end %>
     </div>

@@ -59,6 +59,9 @@ a {
   text-decoration: none;
 }
 
+.gray-text {
+  color: $gray-600;
+}
 // ヘッダー
 .navbar ul {
   margin-top: 12px;
@@ -475,7 +478,15 @@ input {
   text-shadow: 1px 2px 3px #808080;
 }
 
-//
+.chat-delete {
+  top: -10px;
+  right: 10px;
+  color: gray;
+}
+.chat-delete:hover {
+  color: red;
+}
+// 参加中チャット一覧
 .chat-list {
   color: #404040;
   border-left: solid 6px #1fa67a; /*左側の線*/
@@ -486,4 +497,20 @@ input {
   padding: 0.5em;
   list-style-type: none !important; /*ポチ消す*/
   font-weight: bold;
+}
+
+// チャット共通
+.chat-date {
+  border-radius: 15px;
+  background-color: #6f87a1;
+  color: #f8f8ff;
+  opacity: 0.7;
+}
+
+// tuuti
+.notification-li {
+  background-color: #fafafa;
+  strong {
+    color: #4a9e91;
+  }
 }

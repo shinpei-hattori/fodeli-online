@@ -77,18 +77,20 @@ RSpec.describe "ChatMessages", type: :system do
       end
 
       context "メッセージの投稿" do
-        it "投稿ができ、削除リンクが表示されること" do
+        it "投稿ができ、「メッセージ、削除リンク、日付、時間」が表示されること" do
           fill_in 'chat_post[message]', with: '今年は寒いですな'
           click_on '投稿'
           expect(page).to have_content '今年は寒いですな'
-          expect(page).to have_link '削除', href: chat_post_path(ChatPost.last)
+          expect(page).to have_link '', href: chat_post_path(ChatPost.last)
+          expect(page).to have_content ChatPost.last.created_at.strftime('%H:%M')
+          expect(page).to have_content ChatPost.last.post_datetime
         end
 
         it "他人の投稿も表示されるが、削除リンクは表示されないこと" do
           create(:chat_post, user: second, chat_room: @room, message: "たしかに寒いですね")
           visit chat_room_path(@room)
           expect(page).to have_content 'たしかに寒いですね'
-          expect(page).not_to have_link '削除', href: chat_post_path(ChatPost.last)
+          expect(page).not_to have_link '', href: chat_post_path(ChatPost.last)
         end
       end
 
@@ -97,7 +99,7 @@ RSpec.describe "ChatMessages", type: :system do
           create(:chat_post, user: user, chat_room: @room, message: "カレー食べたい")
           create(:chat_post, user: second, chat_room: @room, message: "お寿司食べたい")
           visit chat_room_path(@room)
-          click_link "削除"
+          click_link "chat-delete"
           page.driver.browser.switch_to.alert.accept
           expect(page).to have_content 'お寿司食べたい'
           expect(page).not_to have_content 'カレー食べたい'

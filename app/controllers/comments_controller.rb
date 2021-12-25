@@ -6,6 +6,8 @@ class CommentsController < ApplicationController
     @user = @tweet.user
     @comment = @tweet.comments.build(user_id: current_user.id, content: params[:comment][:content])
     if !@tweet.nil? && @comment.save
+      # 通知を登録
+      @tweet.create_notification_comment!(current_user, @comment.id)
       flash[:success] = "コメントを追加しました！"
     else
       flash[:danger] = @comment.errors.full_messages

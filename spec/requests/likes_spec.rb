@@ -4,7 +4,7 @@ RSpec.describe "ツイートのいいね登録機能", type: :request do
   let(:user) { create(:user) }
   let(:tweet) { create(:tweet) }
 
-  context "いいね登録処理" do
+  context "いいね登録処理と通知登録" do
     context "ログインしていない場合" do
       it "いいね登録は実行できず、ログインページへリダイレクトすること" do
         expect {
@@ -26,16 +26,16 @@ RSpec.describe "ツイートのいいね登録機能", type: :request do
         login_for_request(user)
       end
 
-      it "ツイートのいいね登録ができること" do
+      it "ツイートのいいね登録と、いいね通知登録ができること" do
         expect {
           post "/likes/#{tweet.id}/create"
-        }.to change(user.likes, :count).by(1)
+        }.to change(user.likes, :count).by(1).and change(Notification, :count).by(1)
       end
 
-      it "Ajaxによるツイートのいいね登録ができること" do
+      it "Ajaxによるツイートのいいね登録と、いいね通知登録ができること" do
         expect {
           post "/likes/#{tweet.id}/create", xhr: true
-        }.to change(user.likes, :count).by(1)
+        }.to change(user.likes, :count).by(1).and change(Notification, :count).by(1)
       end
 
       it "ツイートのいいねの解除ができること" do

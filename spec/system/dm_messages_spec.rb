@@ -75,10 +75,12 @@ RSpec.describe "dm_messages", type: :system do
           click_link "チャットへ"
         end
 
-        it "メッセージを投稿するとチャット画面にメッセージが表示されること", js: true do
+        it "メッセージを投稿するとチャット画面にメッセージと日付と時間が表示されること", js: true do
           fill_in "dm_message_message", with: "今日ラーメンいかない？"
           click_button "投稿"
           expect(page).to have_content "今日ラーメンいかない？"
+          expect(page).to have_content DmMessage.last.created_at.strftime('%H:%M')
+          expect(page).to have_content DmMessage.last.post_datetime
           expect(page).to have_title full_title("個人チャット")
         end
       end
@@ -95,12 +97,12 @@ RSpec.describe "dm_messages", type: :system do
         it "自分自身のみ削除リンクが表示されていること", js: true do
           expect(page).to have_content "うどん食べたい"
           expect(page).to have_content "そば食べたい"
-          expect(page).to have_link "削除", href: dm_message_path(user.dm_messages.last)
-          expect(page).not_to have_link "削除", href: dm_message_path(other_user.dm_messages.last)
+          expect(page).to have_link "", href: dm_message_path(user.dm_messages.last)
+          expect(page).not_to have_link "", href: dm_message_path(other_user.dm_messages.last)
         end
 
         it "メッセージを削除するとチャット画面にメッセージが表示されないこと", js: true do
-          click_link "削除"
+          click_link "chat-delete"
           page.driver.browser.switch_to.alert.accept
           expect(page).not_to have_content "うどん食べたい"
           expect(page).to have_title full_title("個人チャット")

@@ -4,6 +4,8 @@ class LikesController < ApplicationController
     @tweet = Tweet.find(params[:tweet_id])
     @user = @tweet.user
     current_user.like(@tweet)
+    # いいねの通知作成
+    @tweet.create_notification_like!(current_user)
     respond_to do |format|
       format.html { redirect_to request.referrer || root_url }
       format.js
