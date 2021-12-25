@@ -5,9 +5,9 @@ class ChatPostsController < ApplicationController
     if ChatUser.find_by(user_id: current_user.id, chat_room_id: params[:chat_post][:chat_room_id]).present?
       @message = ChatPost.new(params.require(:chat_post).permit(:user_id, :message, :chat_room_id).merge(user_id: current_user.id))
       if @message.save
+        # 通知作成
+        @message.create_notification_chat_post!(current_user)
         @messages = @message.chat_room.chat_posts
-        # created_at = Mon, 20 Dec 2021 15:42:17 JST +09:00
-        # created_at.to_date = Mon, 20 Dec 2021
         # チャット日付作成
         post_dates = @messages.group_by{|post_date| post_date.created_at.to_date}
         @first_post_time = []

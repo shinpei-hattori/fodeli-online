@@ -50,8 +50,6 @@ class ChatRoomsController < ApplicationController
       # ここまで
       @message = ChatPost.new
       @users = @room.chat_users
-      @post = ChatPost.new
-
     else
       redirect_back(fallback_location: root_path)
     end

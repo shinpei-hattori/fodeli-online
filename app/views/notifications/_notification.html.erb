@@ -2,27 +2,28 @@
 <% visited = notification.visited %>
 
 <li class="list-group-item notification-li">
-  <p>
+  <section>
     <%= link_to visitor do%>
       <%=gravatar_for(visitor, size: 25,cl: "mr-1 user-picture") %><strong><%=visitor.name %></strong>
     <% end %>
 
-    さんが
     <% case notification.action %>
     <% when 'follow' then %>
+      さんが
       <%=link_to visited  do %>
         <strong>あなた</strong>
       <% end %>
 
       <span>をフォローしました</span>
     <% when 'like' then %>
+      さんが
       <%=link_to notification.tweet do %>
         <strong>あなたの投稿</strong>
       <% end %>
 
       にいいねしました
     <% when 'comment' then %>
-
+      さんが
       <% if notification.tweet.user_id == visited.id %>
         <%= link_to notification.tweet do %>
           <strong>あなたの投稿</strong>
@@ -34,8 +35,23 @@
         <% end %>
       <% end %>
         にコメントしました
+        <p class="m-0 mt-2 gray-text"><%= notification.comment.content %></p>
+    <% when 'chat_post' then %>
+      さんが
+      <%= link_to notification.chat_post.chat_room do %>
+        <strong>(<%=notification.chat_post.chat_room.company.name%>)<%=notification.chat_post.chat_room.area.city%>ルーム</strong>
+      <% end %>
+      にコメントしました
+      <p class="m-0 mt-2 gray-text"><%= notification.chat_post.message %></p>
+    <% when 'dm_message' then %>
+      さんから
+      <%= link_to notification.dm_message.dm_room do %>
+        <strong>メッセージ</strong>
+      <% end %>
+      が届いています
+      <p class="m-0 mt-2 gray-text"><%= notification.dm_message.message %></p>
     <% end %>
-  </p>
+  </section>
   <p class="timestamp m-0 text-right">
     <%= time_ago_in_words(notification.created_at) %>前
   </p>

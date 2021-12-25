@@ -15,17 +15,25 @@ RSpec.describe "ChatPosts", type: :request do
     end
 
     context "メッセージの投稿" do
-      it "メッセージの投稿ができること" do
+      it "メッセージの投稿と通知登録ができること" do
         expect {
           post chat_posts_path, params: { chat_post: { chat_room_id: chat_user1.chat_room_id, message: "ラーメン食べたい！" } }
-        } .to change(ChatPost, :count).by(1)
+        } .to change(ChatPost, :count).by(1).and change(Notification, :count).by(1)
         expect(response).to redirect_to chat_room_path(chat_user1.chat_room)
       end
 
-      it "Ajaxによるメッセージの投稿ができること" do
+      it "ルームのユーザーが増えれば通知の作成数も増えること" do
+        create(:chat_user, user: third, chat_room: room)
+        expect {
+          post chat_posts_path, params: { chat_post: { chat_room_id: chat_user1.chat_room_id, message: "ラーメン食べたい！" } }
+        } .to change(ChatPost, :count).by(1).and change(Notification, :count).by(2)
+        expect(response).to redirect_to chat_room_path(chat_user1.chat_room)
+      end
+
+      it "Ajaxによるメッセージの投稿と通知登録ができること" do
         expect {
           post chat_posts_path, params: { chat_post: { chat_room_id: chat_user1.chat_room_id, message: "ラーメン食べたい！" } }, xhr: true
-        } .to change(ChatPost, :count).by(1)
+        } .to change(ChatPost, :count).by(1).and change(Notification, :count).by(1)
       end
     end
 

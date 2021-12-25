@@ -15,17 +15,17 @@ RSpec.describe "個人チャットのメッセージ", type: :request do
     end
 
     context "メッセージの投稿" do
-      it "メッセージの投稿ができること" do
+      it "メッセージの投稿と通知登録ができること" do
         expect {
           post dm_messages_path, params: { dm_message: { dm_room_id: entry1.dm_room_id, message: "ラーメン食べたい！" } }
-        } .to change(DmMessage, :count).by(1)
+        } .to change(DmMessage, :count).by(1).and change(Notification, :count).by(1)
         expect(response).to redirect_to dm_room_path(entry1.dm_room)
       end
 
-      it "Ajaxによるメッセージの投稿ができること" do
+      it "Ajaxによるメッセージの投稿と通知登録ができること" do
         expect {
           post dm_messages_path, params: { dm_message: { dm_room_id: entry1.dm_room_id, message: "ラーメン食べたい！" } }, xhr: true
-        } .to change(DmMessage, :count).by(1)
+        } .to change(DmMessage, :count).by(1).and change(Notification, :count).by(1)
       end
     end
 
