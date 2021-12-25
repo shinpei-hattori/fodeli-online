@@ -41,7 +41,7 @@ class ChatRoomsController < ApplicationController
     if ChatUser.find_by(user_id: current_user.id, chat_room_id: @room.id).present?
       @messages = @room.chat_posts
       # チャット日付作成
-      post_dates = @messages.group_by{|post_date| post_date.created_at.to_date}
+      post_dates = @messages.group_by { |post_date| post_date.created_at.to_date }
       @first_post_time = []
       post_dates.each do |pd|
         first_pd = pd.flatten[1]

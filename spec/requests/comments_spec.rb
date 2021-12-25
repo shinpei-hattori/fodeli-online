@@ -5,7 +5,7 @@ RSpec.describe "ツイートのコメント機能", type: :request do
   let!(:other_user) { create(:user) }
   let!(:third) { create(:user) }
   let!(:forth) { create(:user) }
-  let!(:tweet) { create(:tweet,user: user) }
+  let!(:tweet) { create(:tweet, user: user) }
   let!(:comment) { create(:comment, user: user, tweet: tweet) }
 
   context "コメントの登録と通知の登録" do

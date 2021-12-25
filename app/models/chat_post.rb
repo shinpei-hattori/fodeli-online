@@ -7,22 +7,21 @@ class ChatPost < ApplicationRecord
   validates :message, presence: true, length: { maximum: 140 }
 
   def post_datetime
-    weeks = ["日","月","火","水","木","金","土"]
-    post_date = self.updated_at.strftime("%Y/%m/%d")
-    post_week = weeks[self.updated_at.wday]
+    weeks = ["日", "月", "火", "水", "木", "金", "土"]
+    post_date = updated_at.strftime("%Y/%m/%d")
+    post_week = weeks[updated_at.wday]
 
     if post_date == Time.current.strftime("%Y/%m/%d")
-      return "今日"
+      "今日"
     elsif post_date == (Time.current - 1.days).strftime("%Y/%m/%d")
-      return "昨日"
+      "昨日"
     else
-      return post_date + "(#{post_week})"
+      post_date + "(#{post_week})"
     end
   end
 
   def create_notification_chat_post!(current_user)
-
-    temp_ids = ChatUser.where(chat_room_id: self.chat_room_id).where.not(user_id: current_user.id)
+    temp_ids = ChatUser.where(chat_room_id: chat_room_id).where.not(user_id: current_user.id)
     unless temp_ids.nil?
       temp_ids.each do |temp_id|
         save_notification_chat_post!(current_user, self, temp_id['user_id'])
@@ -38,5 +37,4 @@ class ChatPost < ApplicationRecord
     )
     notification.save if notification.valid?
   end
-
 end

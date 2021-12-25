@@ -34,11 +34,11 @@ class Tweet < ApplicationRecord
 
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
-    #selectメソッドは、取得したい列を指定することが出来るメソッド
-    #where.notで外したい条件を指定
-    #distinctでuser_idが重複したデータを除外
+    # selectメソッドは、取得したい列を指定することが出来るメソッド
+    # where.notで外したい条件を指定
+    # distinctでuser_idが重複したデータを除外
     temp_ids = Comment.select(:user_id).where(tweet_id: id).where.not(user_id: current_user.id).distinct
-    if !temp_ids.blank?
+    if temp_ids.present?
       temp_ids.each do |temp_id|
         save_notification_comment!(current_user, comment_id, temp_id['user_id'])
       end
@@ -46,7 +46,6 @@ class Tweet < ApplicationRecord
       # まだ誰もコメントしていない場合は、投稿者に通知を送る
       save_notification_comment!(current_user, comment_id, user_id)
     end
-
   end
 
   def save_notification_comment!(current_user, comment_id, visited_id)
@@ -74,6 +73,4 @@ class Tweet < ApplicationRecord
         end
       end
     end
-
-
 end

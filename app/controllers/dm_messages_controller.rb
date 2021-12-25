@@ -9,7 +9,7 @@ class DmMessagesController < ApplicationController
         @message.create_notification_dm_message!(current_user)
         @messages = @message.dm_room.dm_messages
         # チャット日付作成
-        post_dates = @messages.group_by{|post_date| post_date.created_at.to_date}
+        post_dates = @messages.group_by { |post_date| post_date.created_at.to_date }
         @first_post_time = []
         post_dates.each do |pd|
           first_pd = pd.flatten[1]
@@ -34,7 +34,7 @@ class DmMessagesController < ApplicationController
     @messages = @room.dm_messages
     @message.destroy
     # チャット日付作成
-    post_dates = @messages.group_by{|post_date| post_date.created_at.to_date}
+    post_dates = @messages.group_by { |post_date| post_date.created_at.to_date }
     @first_post_time = []
     post_dates.each do |pd|
       first_pd = pd.flatten[1]

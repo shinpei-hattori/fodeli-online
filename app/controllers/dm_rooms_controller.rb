@@ -18,7 +18,7 @@ class DmRoomsController < ApplicationController
     if DmEntrie.where(user_id: current_user.id, dm_room_id: @room.id).present?
       @messages = @room.dm_messages
       # チャット日付作成
-      post_dates = @messages.group_by{|post_date| post_date.created_at.to_date}
+      post_dates = @messages.group_by { |post_date| post_date.created_at.to_date }
       @first_post_time = []
       post_dates.each do |pd|
         first_pd = pd.flatten[1]
