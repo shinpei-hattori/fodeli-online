@@ -118,6 +118,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @users = User.all.where(["name like?","%#{params[:keyword]}%"]).page(params[:page]).per(30)
+    @users_count = User.all.where(["name like?","%#{params[:keyword]}%"]).count
+    @search = 'search'
+    render 'users/index'
+  end
+
   private
 
     # ユーザー新規作成時に許可する属性

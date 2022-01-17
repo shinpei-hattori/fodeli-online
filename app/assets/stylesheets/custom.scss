@@ -4,8 +4,13 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
+$custom-file-text: (
+  ja: '参照',
+);
 // 全ページ共通
+body {
+  font-family: メイリオ, Meiryo, 'Noto Sans JP', sans-serif;
+}
 
 section {
   overflow: auto;
@@ -20,6 +25,10 @@ textarea {
   h1 {
     margin-bottom: 10px;
   }
+}
+
+.page {
+  background-color: #e3f2fd;
 }
 
 // テキストの見栄え
@@ -58,6 +67,14 @@ a {
   display: inline-block;
   text-decoration: none;
 }
+// search
+.search-btn {
+  color: #fff;
+  background-color: #333c5e;
+  &:hover {
+    background-color: #768fb5;
+  }
+}
 
 .gray-text {
   color: $gray-600;
@@ -67,7 +84,7 @@ a {
   margin-top: 12px;
   margin-bottom: 12px;
   .nav-link {
-    color: gray;
+    color: #103253;
   }
   .nav-link::after {
     position: absolute;
@@ -158,9 +175,15 @@ input {
   padding-bottom: 10px;
   border-bottom: 1px solid #eaeaea;
 }
+.user-picture-box {
+  background-color: #e1f5f5;
+  border-radius: 16px;
+}
 
 .user-picture {
-  border-radius: 10px;
+  border-radius: 20px;
+  margin-top: 0.5em;
+  margin-left: 1em;
 }
 
 .user-picture img {
@@ -169,20 +192,10 @@ input {
   box-sizing: border-box;
 }
 
-.user-picture-box {
-  margin-top: 0.5em;
-  margin-left: 1em;
+.profile-content {
+  background-color: #fff;
+  border-radius: 20px;
 }
-
-.show-user-head {
-  background-color: #ccffcc;
-  border-left: 5px solid #ccff66;
-}
-
-.show-user-introduction {
-  word-break: break-all;
-}
-
 .account-edit {
   margin-top: 20px;
 }
@@ -219,11 +232,22 @@ input {
 }
 
 ///ツイートのスタイル
+.tweet-form {
+  background-color: #e1f5f5;
+  border-radius: 16px;
+}
+
 .tweets {
   list-style: none;
+  background-color: #fff;
+  padding: 20px;
+  border: 5px solid #c9e5e6;
+  border-radius: 16px;
   li {
     padding: 0;
-    border-top: 1px solid #eaeaea;
+    &:not(:first-child) {
+      border-top: 1px solid #eaeaea;
+    }
   }
 }
 .tweet-link {
@@ -283,10 +307,13 @@ input {
 
 .comments {
   list-style: none;
+  background-color: #fff;
   li {
     font-size: 14px;
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    &:not(:first-child) {
+      border-top: 1px solid #e8e8e8;
+    }
     .comment {
       font-size: 16px;
     }
@@ -300,14 +327,10 @@ input {
 // 個人チャット
 
 .chat-user-name {
-  position: relative;
-  padding: 5px 5px 5px 42px;
   background: #77c3df;
   font-size: 20px;
   color: white;
-  margin-left: -33px;
-  line-height: 1.3;
-  z-index: -1;
+  border-radius: 20px;
 }
 
 .chat-user-name:before {
@@ -325,8 +348,14 @@ input {
   background: #fff;
   position: relative;
   display: inline-block;
-  // width: 100%;
-  // border-radius: 20px;
+}
+@media screen and (min-width: 375px) and (max-width: 700px) {
+  .message-box {
+    font-size: 0.8rem;
+  }
+  .message-box-own {
+    font-size: 0.8rem;
+  }
 }
 
 .message-box:after {
@@ -500,7 +529,9 @@ input {
 }
 
 // チャット共通
+
 .chat-date {
+  box-sizing: border-box;
   border-radius: 15px;
   background-color: #6f87a1;
   color: #f8f8ff;

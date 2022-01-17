@@ -2,16 +2,29 @@
 <% if logged_in? %>
   <div class="container">
     <section class="row">
-      <aside class="col-md-4">
-        <section class="user_info">
-          <%= render 'shared/user_info' %>
-        </section>
-        <section class="tweet_form">
-          <%= render 'shared/tweet_form' %>
-        </section>
+      <aside class="col-lg-4">
+        <div class="p-3 tweet-form shadow mt-5">
+          <section class="user_info">
+            <%= render 'shared/user_info' %>
+          </section>
+          <section class="tweet_form">
+            <%= render 'shared/tweet_form' %>
+          </section>
+        </div>
       </aside>
-      <div class="col-md-8">
-        <h3>みんなのツイート (<%= @feed_count %>)</h3>
+      <div class="col-lg-8">
+          <div class="row">
+            <%= form_with url: tweet_search_path, method: :get, class: "form-inline d-block text-right col-xl-12  mt-4 mt-lg-0", local: true do |f| %>
+              <input class="form-control m-0 mr-1" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword">
+              <button class="btn search-btn mt-2 m-md-0" type="submit">Search</button>
+            <% end %>
+          </div>
+          <% if @search == 'search'%>
+            <h4 class="mb-3"><%= @feed_count %>件ヒットしました</h4>
+          <% else %>
+            <h4 class="mb-3">みんなのツイート (<%= @feed_count %>)</h4>
+          <% end %>
+
         <%= render 'shared/feed' %>
       </div>
     </section>

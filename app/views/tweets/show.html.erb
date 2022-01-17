@@ -1,14 +1,14 @@
 <% provide(:title, "ツイートの詳細") %>
 <div class="container">
   <div class="row mt-5">
-    <section id="tweet-<%= @tweet.id %>" class="col-md-4">
+    <section id="tweet-<%= @tweet.id %>" class="col-lg-4 tweets p-3 mb-3 mb-lg-0">
       <%= link_to gravatar_for(@tweet.user, size: 50), @tweet.user %>
       <span class="user ml-3"><%= link_to @tweet.user.name, @tweet.user %></span>
       <%= render 'users/like_form' %>
       <p class="content mt-3"><%= @tweet.content %></p>
       <% if @tweet.pictures? %>
         <% @tweet.pictures.each do |picture| %>
-        <p><%= image_tag picture.to_s %></p>
+        <p><%= image_tag picture.to_s,class: "img-fluid" %></p>
         <% end %>
       <% end %>
       <% if current_user == @tweet.user %>
@@ -22,7 +22,7 @@
                                            data: { confirm: "投稿を削除しますか?" } %>
         <% end %>
     </section>
-    <section class="col-md-8">
+    <section class="col-lg-8">
       <div class="comment">
         <%= render "comments/new" %>
         <%= render "comments/feed_comments" %>
