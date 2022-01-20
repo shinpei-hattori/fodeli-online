@@ -31,6 +31,22 @@ textarea {
   background-color: #e3f2fd;
 }
 
+// dropdown
+// ハンバーガーの枠を消す
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler:active {
+  outline: none;
+}
+button:focus {
+  outline: none;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='4' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 // テキストの見栄え
 h1,
 h2,
@@ -75,18 +91,36 @@ a {
     background-color: #768fb5;
   }
 }
-
+.alert {
+  z-index: 1040;
+}
 .gray-text {
   color: $gray-600;
 }
+
 // ヘッダー
+#main-box {
+  margin-top: 124px;
+}
+@media screen and (max-width: 991px) {
+  #main-box {
+    margin-top: 90px;
+  }
+}
+.nav-item {
+  color: red;
+}
 .navbar ul {
   margin-top: 12px;
   margin-bottom: 12px;
   .nav-link {
-    color: #103253;
+    color: #103253 !important;
   }
-  .nav-link::after {
+  .nav-link:hover {
+    color: $success !important;
+    transform: scale(1.1, 1.1);
+  }
+  .dropdown-item::after {
     position: absolute;
     bottom: 4px;
     left: 0;
@@ -98,10 +132,11 @@ a {
     transform-origin: center top;
     transition: transform 0.3s;
   }
-  .nav-link:hover::after {
+  .dropdown-item:hover::after {
     transform: scale(1, 1);
   }
-  .nav-link:hover {
+  .dropdown-item:hover {
+    background-color: #fff;
     color: $success;
   }
 }
@@ -109,6 +144,20 @@ a {
   float: left;
   img {
     width: 150px;
+  }
+}
+@media screen and (max-width: 991px) {
+  #logo {
+    img {
+      width: 100px;
+    }
+  }
+}
+.chat-menu {
+  background-color: #fff;
+  border: none;
+  &:hover {
+    color: $success;
   }
 }
 
@@ -198,6 +247,14 @@ input {
 }
 .account-edit {
   margin-top: 20px;
+}
+
+// ユーザー編集ページ
+.user-edit-box {
+  background-color: #fff;
+  padding: 20px;
+  border: 5px solid #c9e5e6;
+  border-radius: 16px;
 }
 
 //// ユーザー一覧ページ ////
@@ -294,7 +351,9 @@ input {
     list-style: none;
     li {
       padding: 0;
-      border-top: 1px solid #eaeaea;
+      &:not(:first-child) {
+        border-top: 1px solid #eaeaea;
+      }
     }
   }
 }
@@ -538,7 +597,7 @@ input {
   opacity: 0.7;
 }
 
-// tuuti
+// 通知
 .notification-li {
   background-color: #fafafa;
   strong {

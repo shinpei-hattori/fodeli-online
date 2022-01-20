@@ -21,10 +21,10 @@
           <div class="alert alert-<%= message_type %>"><%= messages %></div>
         <% end %>
       <% end %>
-      <div class="container">
+      <div class="container pt-5" id="main-box">
         <%= yield %>
       </div>
+      <%= render 'layouts/footer' %>
     </div>
-    <%= render 'layouts/footer' %>
   </body>
 </html>

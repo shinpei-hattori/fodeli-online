@@ -1,6 +1,6 @@
 <% provide(:title, "ツイートの詳細") %>
 <div class="container">
-  <div class="row mt-5">
+  <div class="row">
     <section id="tweet-<%= @tweet.id %>" class="col-lg-4 tweets p-3 mb-3 mb-lg-0">
       <%= link_to gravatar_for(@tweet.user, size: 50), @tweet.user %>
       <span class="user ml-3"><%= link_to @tweet.user.name, @tweet.user %></span>

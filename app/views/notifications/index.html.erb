@@ -1,6 +1,6 @@
 <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
 <% provide(:title, "通知") %>
-<div class="row mt-5">
+<div class="row">
   <section class="col-md-8">
     <ul class="list-group">
       <% if notifications.exists? %>

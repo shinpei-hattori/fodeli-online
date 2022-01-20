@@ -29,6 +29,8 @@ group :production do
 end
 
 group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 4.0.0.beta2'
   gem 'rails-controller-testing'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

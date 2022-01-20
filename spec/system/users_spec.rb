@@ -8,18 +8,40 @@ RSpec.describe "Users", type: :system do
   let(:picture) { Rack::Test::UploadedFile.new(picture_path) }
 
   describe "ユーザー一覧ページ" do
-    it "ぺージネーション、削除ボタンが表示されること" do
-      create_list(:user, 31)
-      login_for_system(user)
-      visit users_path
-      expect(page).to have_css "ul.pagination"
-      User.page(1).each do |u|
-        expect(page).to have_link u.name, href: user_path(u)
-      end
-    end
+
   end
 
   describe "ユーザー一覧ページ" do
+    context "レイアウト" do
+      it "ぺージネーション、削除ボタンが表示されること" do
+        create_list(:user, 31)
+        login_for_system(user)
+        visit users_path
+        expect(page).to have_css "ul.pagination"
+        User.page(1).each do |u|
+          expect(page).to have_link u.name, href: user_path(u)
+        end
+      end
+    end
+
+    context "ユーザー検索" do
+      it "期待した検索結果が得られること" do
+        login_for_system(user)
+        create(:user, name: "ジョン")
+        create(:user, name: "山田")
+        create(:user, name: "山岸")
+        create(:user, name: "山岸")
+        visit users_path
+        fill_in "keyword", with: "山"
+        click_button "Search"
+        expect(page).to have_content "3名ヒットしました"
+        expect(page).to have_content "山田"
+        expect(page).to have_content "山岸"
+        expect(page).to have_content "山岸"
+        expect(page).not_to have_content "ジョン"
+      end
+    end
+
     context "管理者ユーザーの場合" do
       it "ぺージネーション、自分以外のユーザーの削除ボタンが表示されること" do
         create_list(:user, 30)
@@ -227,6 +249,15 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_content "いいねしたツイート (#{user.likes.count})"
           expect(page).to have_css "ul.like-tweet"
           expect(page).to have_css "li#tweet-#{like.tweet.id}"
+        end
+
+        it "参加中チャットを選択すると、参加チャット一覧が表示されること", js: true do
+          chat_user = create(:chat_user,user:user)
+          visit user_path(user)
+          select "参加中チャット", from: "status"
+          expect(page).to have_content "参加中チャット (#{user.chat_users.count})"
+          expect(page).to have_css "ul.list-group"
+          expect(page).to have_css "li#chat-#{chat_user.chat_room.id}"
         end
       end
     end

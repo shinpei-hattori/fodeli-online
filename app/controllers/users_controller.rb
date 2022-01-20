@@ -13,6 +13,12 @@ class UsersController < ApplicationController
       @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)
     elsif @selected_status == "いいねしたツイート"
       @like_tweet = Kaminari.paginate_array(@user.likes.map(&:tweet)).page(params[:page]).per(5)
+    elsif @selected_status == "参加中チャット"
+      @entries = @user.chat_users
+      @chat_rooms = @entries.map(&:chat_room)
+      @chat_rooms = @chat_rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
+      @chat_rooms_count = @chat_rooms.count
+      @chat_rooms = Kaminari.paginate_array(@chat_rooms).page(params[:page]).per(5)
     elsif @selected_status.nil?
       @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)
     end
@@ -112,10 +118,11 @@ class UsersController < ApplicationController
   def chatlists
     @user = current_user
     @entries = @user.chat_users
-    if @entries.present?
-      @rooms = @entries.map(&:chat_room)
-      @rooms = @rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
-    end
+    # if @entries.present?
+      @chat_rooms = @entries.map(&:chat_room)
+      @chat_rooms = @chat_rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
+      @chat_rooms = Kaminari.paginate_array(@chat_rooms).page(params[:page]).per(5)
+    # end
   end
 
   def search

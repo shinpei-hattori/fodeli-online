@@ -1,0 +1,16 @@
+<li class="list-group-item p-0 chat-list" id="chat-<%= chat_room.id %>">
+  <%= link_to(chat_room,class: "d-block tweet-link") do %>
+  <div class="row m-0 p-2">
+    <div class="col-10">
+      <p class="text-info"><%= chat_room.company.name %></p>
+      <p class="m-0"><%= chat_room.area.city %>のチャット</p>
+    </div>
+    <% if current_user?(@user) %>
+      <object class="col-2">
+        <%= link_to "退出", chat_room, method: :delete,
+                                        data: { confirm: "ルームを退出しますか?" } %>
+      </object>
+    <% end %>
+  </div>
+  <% end %>
+</li>
