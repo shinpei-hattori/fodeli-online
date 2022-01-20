@@ -1,10 +1,8 @@
-
 <% provide(:title, "チャット検索") %>
 <%= form_with(url: chat_rooms_path,scope: :session,id: "chat", local: true) do |f| %>
-<%= hidden_field_tag :city, "aaaa" %>
+<%= hidden_field_tag :city, "Uber Eats" %>
 <div class="container">
-
-  <section class="row mt-5">
+  <section class="row">
     </label>
       <h4 class="col-12 mb-5 company-head p-3 pl-5"><label for="company">会社を選んでください</label></h4>
       <%= select_tag 'company', options_for_select(["Uber Eats","出前館","DiDi Food","menu","Chompy","Wolt","foodpanda","DOORDASH"]), id: 'company',class: "form-control inputstl col-5 mb-5" %>

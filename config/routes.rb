@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post   :login,     to: 'sessions#create'
   delete :logout,    to: 'sessions#destroy'
   get :signup,       to: 'users#new'
+  get :user_search, to: 'users#search'
   resources :users do
     member do
       get :following, :followers, :dmlists ,:chatlists
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
   resources :tweets
+  get :tweet_search, to: 'tweets#search'
   root 'static_pages#home'
   get :about,        to: 'static_pages#about'
   post   "likes/:tweet_id/create"  => "likes#create"

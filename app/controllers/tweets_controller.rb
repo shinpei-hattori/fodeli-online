@@ -51,6 +51,14 @@ class TweetsController < ApplicationController
     end
   end
 
+  def search
+    @feed_items = Kaminari.paginate_array(current_user.tweet_search(params[:keyword])).page(params[:page]).per(5)
+    @feed_count = current_user.tweet_search(params[:keyword]).count
+    @search = 'search'
+    @tweet = current_user.tweets.build
+    render 'static_pages/home'
+  end
+
   private
 
     def tweet_params

@@ -4,8 +4,8 @@
 <% if messages.present? %>
   <% messages.each do |m| %>
     <%if @first_post_time.include?(m.created_at) == true %>
-      <div class="col-12 text-center mb-3">
-        <span class="p-2 chat-date"><%= m.post_datetime %></span>
+      <div class="col-12 text-center mb-3 chat-date-box">
+        <span class="chat-date d-inline-block p-2"><%= m.post_datetime %></span>
       </div>
     <% end %>
     <% if current_user?(m.user) %>
@@ -16,12 +16,12 @@
           <i class="fas fa-times-circle"></i>
         <% end %>
       </div>
-      <!-- <div class="col-12 mb-2">
+      <!-- <div class="col-12 mbs-2">
       </div> -->
     <% else %>
       <!-- <div class="col-2">
       </div> -->
-      <div class="col-12 d-flex mb-3">
+      <div class="col-12 d-flex mb-3 p-0">
         <%= link_to gravatar_for(m.user, size: 50, cl: "gravatar user-picture"), m.user%>
         <p class="message-box rounded p-3 m-0 ml-3"><%= m.message%></p>
         <span class="align-self-end ml-2 timestamp"><%= m.created_at.strftime('%H:%M') %></span>

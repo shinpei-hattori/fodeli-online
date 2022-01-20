@@ -56,6 +56,11 @@ class User < ApplicationRecord
                      OR user_id = :user_id", user_id: id)
   end
 
+  #ツイートの検索
+  def tweet_search(keyword)
+    self.feed.where(["content like?","%#{keyword}%"])
+  end
+
   # 永続セッションのためにユーザーをデータベースに記憶する
   def remember
     # 新しくトークンを作成。

@@ -3,8 +3,9 @@
 
 <li class="list-group-item notification-li">
   <section>
+
     <%= link_to visitor do%>
-      <%=gravatar_for(visitor, size: 25,cl: "mr-1 user-picture") %><strong><%=visitor.name %></strong>
+      <%=gravatar_for(visitor, size: 25,cl: "m-0 mr-1 user-picture") %><strong><%=visitor.name %></strong>
     <% end %>
 
     <% case notification.action %>
@@ -12,7 +13,7 @@
       さんが
       <%=link_to visited  do %>
         <strong>あなた</strong>
-      <% end %>
+    <% end %>
 
       <span>をフォローしました</span>
     <% when 'like' then %>
@@ -20,7 +21,6 @@
       <%=link_to notification.tweet do %>
         <strong>あなたの投稿</strong>
       <% end %>
-
       にいいねしました
     <% when 'comment' then %>
       さんが
