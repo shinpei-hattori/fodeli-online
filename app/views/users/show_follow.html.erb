@@ -1,12 +1,11 @@
 <% provide(:title, @title) %>
 <div class="row align-items-start mt-5">
-  <aside class="col-md-4 p-4 user-picture-box shadow">
+  <aside class="col-lg-4 p-4 user-picture-box shadow">
     <section class="user_info">
       <div class="d-flex align-items-center mb-4 pb-2 border-bottom">
-        <%= gravatar_for @user %>
-        <h1 class="m-0 ml-4"><%= @user.name %></h1>
+        <%= gravatar_for(@user, size: 50) %>
+        <h3 class="m-0 ml-4"><%= @user.name %></h3>
       </div>
-      <p><b>ツイート</b><%= @user.tweets.count %><b>件</b></p>
       <p><%= link_to "プロフィール", @user %></p>
     </section>
     <section class="stats">
@@ -20,7 +19,7 @@
       <% end %>
     </section>
   </aside>
-  <div class="col-md-8">
+  <div class="col-lg-8">
     <h3 class="p-3"><%= @title %></h3>
     <% if @users.any? %>
       <ul class="users follow">
