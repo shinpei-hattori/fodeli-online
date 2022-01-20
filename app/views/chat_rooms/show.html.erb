@@ -1,20 +1,22 @@
 <% provide(:title, "#{@area.city}のチャット") %>
-<div class="row mt-5">
+<div class="row pt-5 align-items-start">
   <div class="col-lg-4">
     <h3 class="chat-area-head shadow-sm p-3 rounded"><%= @company.name %><br><%= @area.city %>のチャット</h3>
     <p class="border-bottom">参加ユーザー</p>
     <% if @users.any? %>
-        <div class="user_avatars mb-sm-3">
+        <div class="user_avatars mb-3">
           <% @users.each do |user| %>
             <%= link_to gravatar_for(user.user, size: 30), user.user %>
           <% end %>
         </div>
     <% end %>
-    <%= link_to "退出", chat_room_path(@room), method: :delete,
-                                                data: { confirm: "ルームを退出しますか?" } %>
+    <div class="mb-4 mb-lg-0">
+      <%= link_to "退出", chat_room_path(@room), method: :delete,
+                                                  data: { confirm: "ルームを退出しますか?" },class: "btn btn-danger" %>
+    </div>
   </div>
   <hr>
-  <div class="chats col-lg-8 pl-5 pr-5 pt-5">
+  <div class="chats col-lg-8 p-3 p-lg-5 pb-0">
     <!--チャットコメント部分-->
     <div class="row" id="chat-content">
       <%= render('shared/message') %>

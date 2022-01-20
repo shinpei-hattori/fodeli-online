@@ -1,13 +1,14 @@
 <% provide(:title, "プロフィール") %>
 <div class="container">
-  <h3 class="title-profile mt-5">プロフィール</h3>
-  <div class="row mt-3 mb-5 mr-0 ml-0">
-    <div class="col-md-4">
-      <div class="user-picture-box">
+  <!-- <h3 class="title-profile mt-5">プロフィール</h3> -->
+  <div class="row mb-5 mr-0 ml-0 ">
+    <div class="col-12 col-lg-4 mb-3 mb-lg-0">
+      <div class="user-picture-box text-center shadow p-3">
         <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
-        <section class="stats">
+        <section class="stats mt-2 mb-2">
           <%= render 'shared/stats' %>
         </section>
+        <%= render 'follow_form' if logged_in? %>
         <% if current_user == @user %>
           <div class="account-edit"><i class="fas fa-arrow-circle-right mr-2"></i><%= link_to "プロフィール編集", edit_user_path(@user) %></div>
         <% end %>
@@ -29,26 +30,22 @@
         <!-- チャット -->
       </div>
     </div>
-    <div class="col-md-8">
-      <%= render 'follow_form' if logged_in? %>
-      <p class="show-user-head p-2 mb-3">名前</p>
-      <h4 class="show-user-name pl-3"><%= @user.name %></h4>
-      <p class="show-user-head p-2 mb-3">性別</p>
-      <p class="pl-3"><%= @user.sex %></p>
+    <div class="col-12 col-lg-8 p-5 profile-content">
+      <h3 class="border-bottom pb-1 mb-4"><i class="fas fa-user mr-3"></i><%= @user.name %></h3>
+      <h3 class="border-bottom pb-1 mb-4"><i class="fas fa-venus-mars mr-3"></i><%= @user.sex %></h3>
       <div class="show-user-introduction">
-        <p class="show-user-head p-2 mb-3">自己紹介</p>
-        <p class="pl-3"><%= @user.introduction %></p>
+        <h3 class=""><i class="fas fa-book-reader mr-3"></i><%= @user.introduction %></h3>
+        <!-- <h3 class="pl-3"></h3> -->
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-9">
-      <div class="form-group col-md-4">
+    <div class="col-lg-9">
+      <div class="form-group row">
         <!-- <label for="inputState">State</label> -->
-
-        <%= form_with(url: user_path(@user),method: :get,id: "profile-status",remote: true)do |f|%>
+        <%= form_with(url: user_path(@user),method: :get,id: "profile-status",class: "col-12 col-sm-8 col-lg-4",remote: true)do |f|%>
           <%= hidden_field_tag :id, @user.id %>
-          <%= select_tag :status, options_for_select(["ツイート履歴", "いいねしたツイート", "参加予定のオフ会","登録チャット"],@selected_status), class: "form-control select-drop" %>
+          <%= select_tag :status, options_for_select(["ツイート履歴", "いいねしたツイート","参加中チャット"],@selected_status), class: "form-control select-drop" %>
         <% end %>
         <script>
           $(document).ready(function(){
@@ -60,8 +57,8 @@
       </div>
       <section id="like-tweet-group">
         <% if !@like_tweet.nil? %>
-          <h3 class="mt-5">いいねしたツイート (<%= @like_tweet.count %>)</h3>
-          <ul class="like-tweet">
+          <h4 class="mt-5 mb-3">いいねしたツイート (<%= @like_tweet.count %>)</h4>
+          <ul class="like-tweet tweets">
             <%= render @like_tweet %>
           </ul>
           <%= paginate @like_tweet,params: {status: "いいねしたツイート"} %>
@@ -70,11 +67,23 @@
 
       <section id="tweets-group">
         <% if !@tweets.nil? %>
-          <h3 class="mt-5">ツイート (<%= @user.tweets.count %>)</h3>
+          <h4 class="mt-5 mb-3">ツイート (<%= @user.tweets.count %>)</h4>
           <ul class="tweets">
             <%= render @tweets %>
           </ul>
           <%= paginate @tweets,params: {status: "ツイート履歴"} %>
+        <% end %>
+      </section>
+
+      <section id="chats-group">
+        <% if !@chat_rooms.nil? %>
+          <h4 class="mt-5 mb-3">参加中チャット (<%= @chat_rooms_count %>)</h4>
+          <ul class="list-group">
+            <% if @chat_rooms.present? %>
+              <%= render @chat_rooms %>
+            <% end %>
+          </ul>
+        <%= paginate @chat_rooms,params: {status: "参加中チャット"} %>
         <% end %>
       </section>
     </div>

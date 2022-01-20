@@ -9,7 +9,7 @@
       <p class="content"><%= @tweet.content %></p>
       <% if @tweet.pictures? %>
         <% @tweet.pictures.each do |picture| %>
-        <p><%= image_tag picture.to_s %></p>
+        <p><%= image_tag picture.to_s, class: "img-fluid" %></p>
         <% end %>
       <% end %>
       <span class="timestamp">

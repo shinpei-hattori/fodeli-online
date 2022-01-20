@@ -1,6 +1,6 @@
 <% provide(:title, "プロフィール編集") %>
-<div class="row mt-5">
-  <div class="col-md-6 col-md-offset-3 mx-auto">
+<div class="row pt-5">
+  <div class="col-md-8 col-lg-6 col-md-offset-3 mx-auto user-edit-box">
     <%= form_with(model: @user, local: true) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
     <div class="gravatar_edit">

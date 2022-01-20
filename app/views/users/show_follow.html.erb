@@ -1,6 +1,6 @@
 <% provide(:title, @title) %>
-<div class="row mt-5">
-  <aside class="col-md-4">
+<div class="row align-items-start mt-5">
+  <aside class="col-md-4 p-4 user-picture-box shadow">
     <section class="user_info">
       <div class="d-flex align-items-center mb-4 pb-2 border-bottom">
         <%= gravatar_for @user %>
@@ -21,7 +21,7 @@
     </section>
   </aside>
   <div class="col-md-8">
-    <h3 class="follow-status p-3"><%= @title %></h3>
+    <h3 class="p-3"><%= @title %></h3>
     <% if @users.any? %>
       <ul class="users follow">
         <%= render @users %>

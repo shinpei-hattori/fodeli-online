@@ -1,11 +1,12 @@
 <%= form_with(model: @tweet, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "  投稿する内容を入力してください" %>
+    <%= f.text_area :content, placeholder: "  投稿する内容を入力してください",class: "form-control" %>
   </div>
-  <span class="picture">
-    <%= f.file_field :pictures, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
-  </span>
+  <div class="custom-file mb-3">
+    <%= f.file_field :pictures, multiple: true, accept: 'image/jpeg,image/gif,image/png',class: "custom-file-input",id: "tweet_pictures",lang: "ja" %>
+    <label class="custom-file-label" for="tweet_pictures" data-browse="参照">ファイルを選択</label>
+  </div>
   <%= f.submit "投稿", class: "btn btn-success" %>
 <% end %>
 
@@ -16,4 +17,9 @@
       alert('画像は5MB未満でないと投稿できません');
     }
   });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+<script>
+  bsCustomFileInput.init();
 </script>
