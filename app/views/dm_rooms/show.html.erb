@@ -4,7 +4,9 @@
     <h4 class="chat-user-name p-2"><i class="fas fa-comment mr-2 chat-head"></i><%= @user.name %>さんとのチャット</h4>
     <% @entries.each do |e| %>
       <div class="user-name mb-2">
-          <%= link_to( gravatar_for(e.user, size: 30), e.user )%>
+          <%= link_to e.user do%>
+            <%= image_tag e.user.image.url,class: "profile-image profile-image-tweet" %>
+          <% end %>
           <a class="rooms-user-link" href="/users/<%= e.user.id %>">
             <%= e.user.name %>さん
           </a>

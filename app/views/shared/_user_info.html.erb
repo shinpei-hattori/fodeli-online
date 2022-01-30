@@ -1,4 +1,7 @@
-<div class="d-flex">
-  <%= link_to gravatar_for(current_user, size: 50), current_user, class: "rounded-circle" %>
+<div class="d-flex align-items-center mb-3">
+  <%= link_to current_user, class: "rounded-circle" do %>
+    <%= image_tag current_user.image.url,class: "profile-image" %>
+
+  <% end %>
   <h3 class="text-center p-3"><%= current_user.name %></h3>
 </div>

@@ -1,5 +1,5 @@
 <li>
-  <%= gravatar_for user, size: 50 %>
+  <%= image_tag user.image.url,class: "profile-image profile-image-tweet" %>
   <%= link_to user.name, user %>
   <!-- 第一条件： ログインしてるユーザーが管理者であり、表示ユーザーがログインしているユーザーでない場合に削除リンクを表示する -->
   <!-- 第二条件： ログインしてるユーザーが管理者ではなく、表示されているユーザーが自身であれば削除リンクを表示する -->

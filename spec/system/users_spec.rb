@@ -4,12 +4,8 @@ RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
   let!(:other_user) { create(:user) }
-  let(:picture_path) { File.join(Rails.root, 'spec/fixtures/files/test_image.jpg') }  # 追記
+  let(:picture_path) { File.join(Rails.root, 'spec/fixtures/files/test_image.jpg') }
   let(:picture) { Rack::Test::UploadedFile.new(picture_path) }
-
-  describe "ユーザー一覧ページ" do
-
-  end
 
   describe "ユーザー一覧ページ" do
     context "レイアウト" do
@@ -27,18 +23,18 @@ RSpec.describe "Users", type: :system do
     context "ユーザー検索" do
       it "期待した検索結果が得られること" do
         login_for_system(user)
-        create(:user, name: "ジョン")
-        create(:user, name: "山田")
-        create(:user, name: "山岸")
-        create(:user, name: "山岸")
+        create(:user, name: "jon")
+        create(:user, name: "やまだ")
+        create(:user, name: "やまおか")
+        create(:user, name: "やましろ")
         visit users_path
-        fill_in "keyword", with: "山"
+        fill_in "keyword", with: "やま"
         click_button "Search"
         expect(page).to have_content "3名ヒットしました"
-        expect(page).to have_content "山田"
-        expect(page).to have_content "山岸"
-        expect(page).to have_content "山岸"
-        expect(page).not_to have_content "ジョン"
+        expect(page).to have_content "やまだ"
+        expect(page).to have_content "やまおか"
+        expect(page).to have_content "やましろ"
+        expect(page).not_to have_content "jon"
       end
     end
 
@@ -252,7 +248,7 @@ RSpec.describe "Users", type: :system do
         end
 
         it "参加中チャットを選択すると、参加チャット一覧が表示されること", js: true do
-          chat_user = create(:chat_user,user:user)
+          chat_user = create(:chat_user, user: user)
           visit user_path(user)
           select "参加中チャット", from: "status"
           expect(page).to have_content "参加中チャット (#{user.chat_users.count})"

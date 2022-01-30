@@ -4,7 +4,7 @@
   <div class="row mb-5 mr-0 ml-0 ">
     <div class="col-12 col-lg-4 mb-3 mb-lg-0">
       <div class="user-picture-box text-center shadow p-3">
-        <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
+        <%= image_tag @user.image.url,class: "profile-image" %>
         <section class="stats mt-2 mb-2">
           <%= render 'shared/stats' %>
         </section>
