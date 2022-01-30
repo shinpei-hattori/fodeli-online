@@ -66,6 +66,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params_update)
+      if params[:user][:remove_avatar] == "1"
+        @user.remove_image!
+        @user.save
+      end
       flash[:success] = "プロフィールが更新されました！"
       redirect_to @user
     else
@@ -118,7 +122,7 @@ class UsersController < ApplicationController
   def chatlists
     @user = current_user
     @entries = @user.chat_users
-    # if @entries.present?
+      # if @entries.present?
       @chat_rooms = @entries.map(&:chat_room)
       @chat_rooms = @chat_rooms.sort { |x, y| x.updated_at <=> y.updated_at }.reverse
       @chat_rooms = Kaminari.paginate_array(@chat_rooms).page(params[:page]).per(5)
@@ -126,8 +130,8 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.all.where(["name like?","%#{params[:keyword]}%"]).page(params[:page]).per(30)
-    @users_count = User.all.where(["name like?","%#{params[:keyword]}%"]).count
+    @users = User.all.where(["name like?", "%#{params[:keyword]}%"]).page(params[:page]).per(30)
+    @users_count = User.all.where(["name like?", "%#{params[:keyword]}%"]).count
     @search = 'search'
     render 'users/index'
   end
@@ -137,12 +141,12 @@ class UsersController < ApplicationController
     # ユーザー新規作成時に許可する属性
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+                                   :password_confirmation, :image)
     end
 
     # プロフィール編集時に許可する属性
     def user_params_update
-      params.require(:user).permit(:name, :email, :introduction, :sex)
+      params.require(:user).permit(:name, :email, :introduction, :sex, :image)
     end
 
     # 正しいユーザーかどうか確認

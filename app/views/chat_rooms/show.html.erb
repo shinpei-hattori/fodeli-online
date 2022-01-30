@@ -2,11 +2,15 @@
 <div class="row pt-5 align-items-start">
   <div class="col-lg-4">
     <h3 class="chat-area-head shadow-sm p-3 rounded"><%= @company.name %><br><%= @area.city %>のチャット</h3>
-    <p class="border-bottom">参加ユーザー</p>
+    <p class="border-bottom">
+      <%=@users.count %>名が参加中
+    </p>
     <% if @users.any? %>
         <div class="user_avatars mb-3">
           <% @users.each do |user| %>
-            <%= link_to gravatar_for(user.user, size: 30), user.user %>
+            <%= link_to user.user do%>
+              <%= image_tag user.user.image.url,class: "profile-image profile-image-tweet" %>
+            <% end %>
           <% end %>
         </div>
     <% end %>

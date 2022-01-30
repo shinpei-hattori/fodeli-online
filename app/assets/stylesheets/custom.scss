@@ -219,6 +219,10 @@ input {
   margin-left: 0;
 }
 
+// .image-remove-check-box {
+//   margin-left: -10.25rem;
+// }
+
 //// プロフィールページ ////
 .title-profile {
   padding-bottom: 10px;
@@ -230,7 +234,6 @@ input {
 }
 
 .user-picture {
-  border-radius: 20px;
   margin-top: 0.5em;
   margin-left: 1em;
 }
@@ -324,13 +327,6 @@ input {
 
 .timestamp {
   color: $gray-600;
-}
-
-///ルートページのuser-info
-.user_info {
-  img {
-    border-radius: 10px;
-  }
 }
 
 //フォロー&フォロワー一覧
@@ -603,4 +599,23 @@ input {
   strong {
     color: #4a9e91;
   }
+}
+
+// profileimage
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.profile-image-tweet {
+  width: 50px;
+  height: 50px;
+}
+
+.profile-image-follow {
+  width: 30px;
+  height: 30px;
 }
