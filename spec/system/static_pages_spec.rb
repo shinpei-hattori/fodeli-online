@@ -84,10 +84,10 @@ RSpec.describe "StaticPages", type: :system do
       context "ツイート検索" do
         it "期待した検索結果が表示されること" do
           login_for_system(user)
-          create(:tweet, user: user,content: "オレンジ")
-          create(:tweet, user: user,content: "レンジ")
-          create(:tweet, user: user,content: "レン")
-          create(:tweet, user: user,content: "アップル")
+          create(:tweet, user: user, content: "オレンジ")
+          create(:tweet, user: user, content: "レンジ")
+          create(:tweet, user: user, content: "レン")
+          create(:tweet, user: user, content: "アップル")
           visit root_path
           fill_in "keyword", with: "レン"
           click_button "Search"

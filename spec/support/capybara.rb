@@ -8,7 +8,7 @@ Capybara.register_driver :remote_chrome do |app|
         'no-sandbox',
         'headless',
         'disable-gpu',
-        'window-size=1680,1050'
+        'window-size=1680,1050',
       ]
     }
   )
@@ -23,7 +23,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :system, js: true) do
-    #driven_by :selenium_chrome_headless
+    # driven_by :selenium_chrome_headless
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
     Capybara.app_host = "http://#{Capybara.server_host}"
     driven_by :remote_chrome

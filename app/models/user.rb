@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  mount_uploader :image, ImageUploader
   has_many :tweets, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship",
                                   foreign_key: "follower_id",
@@ -30,7 +31,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates :introduction, length: { maximum: 255 }
-
+  validate  :image_size
   class << self # クラスメソッド 使用例 User.digest("aaa")
     # 渡された文字列のハッシュ値を返す
     def digest(string)
@@ -56,9 +57,9 @@ class User < ApplicationRecord
                      OR user_id = :user_id", user_id: id)
   end
 
-  #ツイートの検索
+  # ツイートの検索
   def tweet_search(keyword)
-    self.feed.where(["content like?","%#{keyword}%"])
+    feed.where(["content like?", "%#{keyword}%"])
   end
 
   # 永続セッションのためにユーザーをデータベースに記憶する
@@ -131,5 +132,12 @@ class User < ApplicationRecord
 
     def downcase_email
       self.email = email.downcase
+    end
+
+    # アップロードされた画像のサイズをバリデーションする
+    def image_size
+      if image.size > 5.megabytes
+        errors.add(:image, "は5MB未満で登録してください")
+      end
     end
 end

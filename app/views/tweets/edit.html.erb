@@ -2,7 +2,9 @@
 <div class="container">
   <div class="row">
     <section id="tweet-<%= @tweet.id %>" class="col-md-8 col-lg-5 tweets">
-      <%= link_to gravatar_for(@tweet.user, size: 50), @tweet.user %>
+      <%= link_to @tweet.user do %>
+        <%= image_tag @tweet.user.image.url,class: "profile-image profile-image-tweet" %>
+      <% end %>
       <span class="user ml-3"><%= link_to @tweet.user.name, @tweet.user %></span>
       <%= form_with(model: @tweet, local: true) do |t| %>
       <div class = 'form-group'>

@@ -26,7 +26,6 @@ RSpec.describe "Relationships", type: :system do
       it "ユーザー情報が表示されていること" do
         expect(page).to have_content user.name
         expect(page).to have_link "プロフィール", href: user_path(user)
-        expect(page).to have_content "ツイート#{user.tweets.count}件"
         expect(page).to have_link "#{user.following.count}", href: following_user_path(user)
         expect(page).to have_link "#{user.followers.count}", href: followers_user_path(user)
       end
@@ -63,7 +62,6 @@ RSpec.describe "Relationships", type: :system do
       it "ユーザー情報が表示されていること" do
         expect(page).to have_content user.name
         expect(page).to have_link "プロフィール", href: user_path(user)
-        expect(page).to have_content "ツイート#{user.tweets.count}件"
         expect(page).to have_link "#{user.following.count}", href: following_user_path(user)
         expect(page).to have_link "#{user.followers.count}", href: followers_user_path(user)
       end
