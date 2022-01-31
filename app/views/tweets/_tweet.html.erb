@@ -5,7 +5,7 @@
     <div class="p-2">
       <object>
         <%= link_to @tweet.user do %>
-         <%= image_tag @tweet.user.image.url,class: "profile-image profile-image-tweet" %>
+          <%= image_tag @tweet.user.image.url,class: "profile-image profile-image-tweet" %>
          <% end %>
       </object>
       <object class="user ml-3"><%= link_to @tweet.user.name, @tweet.user %></object>
