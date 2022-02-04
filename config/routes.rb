@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get :following, :followers, :dmlists ,:chatlists
     end
   end
+  resources :account_activations, only: [:edit]
   resources :relationships, only: [:create, :destroy]
   resources :tweets
   get :tweet_search, to: 'tweets#search'
