@@ -85,13 +85,13 @@ RSpec.describe "Users", type: :system do
     end
 
     context "ユーザー登録処理" do
-      it "有効なユーザーでユーザー登録を行うとユーザー登録成功のフラッシュが表示されること" do
+      it "有効なユーザーでユーザー登録を行うと認証メール送信のフラッシュが表示されること" do
         fill_in "ユーザー名", with: "Example User"
         fill_in "メールアドレス", with: "user@example.com"
         fill_in "パスワード", with: "password"
         fill_in "パスワード(確認)", with: "password"
         click_button "登録する"
-        expect(page).to have_content "Fodeli Onlineへようこそ！"
+        expect(page).to have_content "認証用メールを送信しました。チェックしてアカウントを有効化してください。"
       end
 
       it "無効なユーザーでユーザー登録を行うとユーザー登録失敗のフラッシュが表示されること" do

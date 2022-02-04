@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    redirect_to root_url and return unless @user.activated?
     @selected_status = params[:status]
-    # debugger
     if @selected_status == "ツイート履歴"
       @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)
     elsif @selected_status == "いいねしたツイート"
@@ -45,15 +45,15 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.page(params[:page]).per(30)
+    @users = User.where(activated: true).page(params[:page]).per(30)
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "Fodeli Onlineへようこそ！"
-      redirect_to @user
+      @user.send_activation_email
+      flash[:info] = "認証用メールを送信しました。チェックしてアカウントを有効化してください。"
+      redirect_to root_url
     else
       render 'new'
     end
