@@ -6,6 +6,8 @@ FactoryBot.define do
     password_confirmation { "foobar" }
     introduction { "はじめまして。UverEatsやってます！よろしくお願いします！" }
     sex { "男性" }
+    activated { true }
+    activated_at { Time.zone.now }
 
     trait :admin do
       admin { true }

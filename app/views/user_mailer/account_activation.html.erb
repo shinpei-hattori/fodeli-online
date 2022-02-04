@@ -1,0 +1,7 @@
+<h1>Fodeli Online</h1>
+
+<p>こんにちは、<%= @user.name %>さん</p>
+<p>Fodeli Onlineへようこそ！</p>
+<p>以下のURLをクリックしてアカウントを有効化してください</p>
+<%= link_to "アカウントの有効化", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>
