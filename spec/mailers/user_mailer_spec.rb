@@ -12,7 +12,7 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.from).to eq(["fodelionline@gmail.com"])
     end
 
-    it "メールの情報に期待する値があること" do
+    it "メールの中身とURLパラメータが確認できること" do
       expect(mail.html_part.body.encoded).to match user.name
       expect(mail.html_part.body.encoded).to match user.activation_token
       expect(mail.html_part.body.encoded).to match CGI.escape(user.email)
@@ -22,18 +22,24 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  # describe "password_reset" do
-  #   let(:mail) { UserMailer.password_reset }
+  describe "パスワード再設定メール" do
+    let(:mail) { UserMailer.password_reset(user) }
+    before do
+      user.reset_token = User.new_token
+    end
 
-  #   it "renders the headers" do
-  #     expect(mail.subject).to eq("Password reset")
-  #     expect(mail.to).to eq(["to@example.org"])
-  #     expect(mail.from).to eq(["from@example.com"])
-  #   end
+    it "メールのヘッダー情報が設定されていること" do
+      expect(mail.subject).to eq("パスワード再設定")
+      expect(mail.to).to eq(["takeru@gmail.com"])
+      expect(mail.from).to eq(["fodelionline@gmail.com"])
+    end
 
-  #   it "renders the body" do
-  #     expect(mail.body.encoded).to match("Hi")
-  #   end
-  # end
+    it "URLパラメータが確認できること" do
+      expect(mail.html_part.body.encoded).to match user.reset_token
+      expect(mail.html_part.body.encoded).to match CGI.escape(user.email)
+      expect(mail.text_part.body.encoded).to match user.reset_token
+      expect(mail.text_part.body.encoded).to match CGI.escape(user.email)
+    end
+  end
 
 end
