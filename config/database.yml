@@ -77,11 +77,12 @@ test:
   #
   # You can use this database configuration with:
   #
-  production:
-    url: <%= ENV['DATABASE_URL'] %>
+  # production:
+  #   url: <%= ENV['DATABASE_URL'] %>
 #
-# production:
-#   <<: *default
-#   database: fodeli_online_production
-#   username: fodeli_online
-#   password: <%= ENV['FODELI_ONLINE_DATABASE_PASSWORD'] %>
+production:
+  <<: *default
+  database: fodeli_online_production
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
