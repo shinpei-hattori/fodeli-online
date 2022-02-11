@@ -8,7 +8,7 @@ services:
       dockerfile: ./docker/web/Dockerfile
   # =========ローカルと本番切り替え===========
     # command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb -e production
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb -e production"
   # ======================================
     volumes:
       - .:/fodeli_online/
