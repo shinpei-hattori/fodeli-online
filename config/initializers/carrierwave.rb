@@ -5,11 +5,9 @@ if Rails.env.production?
       :provider              => 'AWS',
       :region                => ENV['S3_REGION'],     # 例: 'ap-northeast-1'
       :aws_access_key_id     => ENV['S3_ACCESS_KEY'],
-      :aws_secret_access_key => ENV['S3_SECRET_KEY'],
-      :path_style            => true
+      :aws_secret_access_key => ENV['S3_SECRET_KEY']
     }
-    config.fog_directory     =  ENV['S3_BUCKET']
-    config.asset_host = 'https://s3.ap-southeast-1.amazonaws.com/fodeli-online-s3'
+    config.fog_directory =  ENV['S3_BUCKET']
     config.fog_public = false
   end
 end
