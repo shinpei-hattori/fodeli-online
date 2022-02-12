@@ -9,6 +9,7 @@ if Rails.env.production?
       :path_style            => true
     }
     config.fog_directory     =  ENV['S3_BUCKET']
+    config.asset_host = 'https://s3.ap-southeast-1.amazonaws.com/fodeli-online-s3'
     config.fog_public = false
   end
 end
