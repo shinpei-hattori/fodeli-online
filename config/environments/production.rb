@@ -63,22 +63,22 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "fodeli_online_#{Rails.env}"
 
+  creds = Aws::Credentials.new(
+    ENV['AWS_ACCESS_KEY_ID'],
+    ENV['AWS_SECRET_ACESS_KEY']
+  )
+
+  Aws::Rails.add_action_mailer_delivery_method(
+    :ses,
+    credentials: creds,
+    region: ENV['AWS_REGION']
+  )
+
+  config.action_mailer.default_url_options = { host: 'fodelionline.site' }
+  config.action_mailer.delivery_method = :ses
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true
-  host = "#{ENV['HEROKU_APPNAME']}.herokuapp.com"
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-  address:              'smtp.gmail.com',
-  port:                  587,
-  domain:               'heroku.com',
-  user_name:            ENV['GMAIL_USERNAME'],
-  password:             ENV['GMAIL_PASSWORD'],
-  authentication:       'plain',
-  enable_starttls_auto:  true
-  }
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
