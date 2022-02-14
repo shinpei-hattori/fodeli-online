@@ -69,13 +69,13 @@ Rails.application.configure do
   )
 
   Aws::Rails.add_action_mailer_delivery_method(
-    :ses,
+    :aws_sdk,
     credentials: creds,
     region: ENV['AWS_REGION']
   )
 
   config.action_mailer.default_url_options = { host: 'fodelionline.site' }
-  config.action_mailer.delivery_method = :ses
+  config.action_mailer.delivery_method = :aws_sdk
   config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = true
