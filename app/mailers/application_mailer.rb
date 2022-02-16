@@ -1,4 +1,9 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'fodelionline@gmail.com'
+  if Rails.env == "production"
+    default from: 'noreply@fodelionline.site'
+  else
+    default from: 'fodelionline@gmail.com'
+  end
+
   layout 'mailer'
 end
