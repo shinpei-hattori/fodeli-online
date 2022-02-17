@@ -624,3 +624,39 @@ input {
 .fogot-pass {
   font-size: 0.8em;
 }
+
+// topページ
+.home-head {
+  color: #4cb0b0;
+  font-size: 2.5em;
+}
+
+.home-head-group {
+  border: 5px solid #c9e5e6;
+  border-radius: 16px;
+  background-color: #fff;
+}
+
+.home-list {
+  background-color: #f7f9f9;
+  border-radius: 10px;
+  list-style: none;
+}
+
+.question {
+  color: #4cb0b0;
+}
+
+.check {
+  color: #4cb0b0;
+}
+
+.home-button {
+  font-size: 1.5em;
+}
+
+@media screen and (max-width: 768px) {
+  .top-content {
+    flex-direction: column-reverse;
+  }
+}

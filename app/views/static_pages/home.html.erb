@@ -30,25 +30,43 @@
     </section>
   </div>
 <% else %>
-  <h1>Fodeli Onlineとは？</h1>
-  <p class="text-center mb-5">フードデリバリー配達員が仕事に関する情報交換や、同業種の繋がり作ることができるサービスです。</p>
-  <div class="row  mb-5">
-    <p class="col-6 d-flex align-items-center">・仕事をしてる時、「注文来ないな〜。稼いでる人はどんな風に仕事しているんだろう？」<br>
-      ・もっと同業種の知り合いが欲しいな〜 一人でずっと仕事してても、寂しくなってくる....<br>
-      こんな風に思ったことはありませんか？
-    ​</p>
-    <%=image_tag("derivari_man.jpg", :alt => "",class: "col-6 border rounded shadow p-0")%>
+  <div class="home-head-group p-5 mb-5">
+    <h1 class="home-head border-bottom pb-3">Fodeli Onlineとは？</h1>
+    <p class="text-center">フードデリバリー配達員が仕事に関する情報交換や、同業種の繋がり作ることができるサービスです。</p>
   </div>
-  <div class="row mb-5">
-    <%=image_tag("chat.jpg", :alt => "",class: "col-6 border rounded shadow p-0")%>
-    <p class="col-6 d-flex align-items-center">フーデリオンラインでは、地域別のオンラインチャットで配達に関する情報交換をすることができます。「 Uber Eats、出前館、フードパンダ、wolt 、menuなど」多くのサービスに対応しています。
+  <div class="row mb-5 top-content">
+    <div class="col-12 col-md-6">
+      <p>
+        ・仕事をしてる時、
+        こんな風に思ったことはありませんか？
+      </p>
+      <ul class="home-list-group p-0">
+        <li class="home-list p-2 mb-3"><i class="fas fa-question-circle question mr-1"></i>「注文来ないな〜。稼いでる人はどんな風に仕事しているんだろう？」</li>
+        <li class="home-list p-2"><i class="fas fa-question-circle question mr-1"></i>もっと同業種の知り合いが欲しいな〜 一人でずっと仕事してても、寂しくなってくる....</li>
+      </ul>
+    </div>
+    <%=image_tag("derivari_man.jpg", :alt => "",class: "col-12 col-md-6 border rounded shadow p-0 mb-3 mb-md-0")%>
+  </div>
+  <div class="row mb-5 align-items-start">
+    <%=image_tag("chat.jpg", :alt => "",class: "col-12 col-md-6 border rounded shadow p-0  mb-3 mb-md-0")%>
+    <div class="col-12 col-md-6">
+      <p>Fodeli Onlineでは、</p>
+      <ul class="home-list-group p-0">
+        <li class="home-list p-2 mb-3"><i class="fas fa-check-circle check mr-1"></i>地域別のオンラインチャット</li>
+        <li class="home-list p-2 mb-3"><i class="fas fa-check-circle check mr-1"></i>ツイート機能</li>
+        <li class="home-list p-2 mb-3"><i class="fas fa-check-circle check mr-1"></i>フォローフォロワー機能</li>
+        <li class="home-list p-2"><i class="fas fa-check-circle check mr-1"></i>個人チャット機能</li>
+      </ul>
+      <p>
+        上記の機能を利用することで情報交換や繋がりを増やすことできます。
+        対応しているサービスは<span class="text-success">「 Uber Eats、出前館、フードパンダ、wolt 、menuなど」</span>多くのサービスに対応しています。
+        今すぐ登録してサービスを利用してみましょう！
+      </p>
+    ​</div>
+  </div>
 
-    ​</p>
-  </div>
-  <div class="row">
-    <p class="col-6 d-flex align-items-center">オフ会の開いたり参加したりもできます。実際に顔を合わせて交流を深めましょう！
-    ​</p>
-    <%=image_tag("off.jpg", :alt => "",class: "col-6 border rounded shadow p-0")%>
+  <div class="text-center">
+    <a class="btn btn-danger home-button" href="/signup" role="button">今すぐ登録する！</a>
   </div>
 <% end %>
 </div>
