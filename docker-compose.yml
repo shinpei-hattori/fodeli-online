@@ -7,8 +7,8 @@ services:
       context: .
       dockerfile: ./docker/web/Dockerfile
   # =========ローカルと本番切り替え===========
-    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb -e production"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb -e production"
   # ======================================
     volumes:
       - .:/fodeli_online/
@@ -22,20 +22,20 @@ services:
     networks:
       - fodeli-online-network
   # =========ローカルと本番切り替え===========
-  #   depends_on:
-  #     - db
+    depends_on:
+      - db
 
-  # db:
-  #   image: postgres
-  #   volumes:
-  #     - 'db-data:/var/lib/postgresql/data'
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #   ports:
-  #     - 5433:5432
-  #   networks:
-  #     - fodeli-online-network
+  db:
+    image: postgres
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5433:5432
+    networks:
+      - fodeli-online-network
   # ======================================
 
   nginx:
@@ -53,12 +53,12 @@ services:
       - fodeli-online-network
 
 # =========ローカルと本番切り替え===========
-  # chrome:
-  #   image: selenium/standalone-chrome
-  #   ports:
-  #     - 4444:4444
-  #   networks:
-  #     - fodeli-online-network
+  chrome:
+    image: selenium/standalone-chrome
+    ports:
+      - 4444:4444
+    networks:
+      - fodeli-online-network
 # ======================================
 
 volumes:
