@@ -108,6 +108,10 @@ RSpec.describe "StaticPages", type: :system do
 
     it "該当の文字列が存在することを確認" do
       expect(page).to have_content 'Foldeli Onlineの使い方'
+      expect(page).to have_content 'ツイート機能'
+      expect(page).to have_content 'フォロワー機能'
+      expect(page).to have_content '個人チャット機能'
+      expect(page).to have_content '全国チャット機能'
     end
 
     it "正しいタイトルが表示されることを確認" do
