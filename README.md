@@ -5,16 +5,16 @@ https://fodelionline.site/
 
 # 技術的ポイント
 
-・**RSpec**で Model, Request, System テスト記述(計 258examples)
-・**Ajax**を用いた非同期処理（フォロー/未フォロー、ツイートに対するいいね機能などの切り替え表示）
-・**Bootstrap**によるレスポンシブ対応
-・**Rubocop**を使用したコード規約に沿った開発
+・**RSpec**で Model, Request, System テスト記述(計 258examples)  
+・**Ajax**を用いた非同期処理（フォロー/未フォロー、ツイートに対するいいね機能などの切り替え表示）  
+・**Bootstrap**によるレスポンシブ対応  
+・**Rubocop**を使用したコード規約に沿った開発  
 ・**14 個**のモデルをそれぞれ関連付けて使用
 
 # DB 設計図
-
+![db](https://user-images.githubusercontent.com/67412898/154822094-1a45725d-be69-4efc-911e-187c322533b3.png)
 # AWS(インフラ)構成図
-
+![aws](https://user-images.githubusercontent.com/67412898/154822069-b864ff91-4286-4111-9a28-8f6a6696ac40.png)
 # アプリケーションの機能
 
 + ユーザー登録機能  
