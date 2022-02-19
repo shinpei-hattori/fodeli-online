@@ -1,0 +1,29 @@
+<% provide(:title, "採用担当者様") %>
+<h1 class="mt-5">採用担当者様 専用ログインフォーム</h1>
+<p class="text-center text-success">下記の「専用ログイン」ボタンを押していただければ、<br>
+  すぐに専用アカウントでログインが可能です。</p>
+<div class="row">
+  <div class="col-md-6 m-auto">
+    <%= form_with(url: login_path,scope: :session, local: true) do |f| %>
+      <div class = 'form-group'>
+        <%= f.label(:email,'メールアドレス') %>
+        <%= f.email_field :email, class: 'form-control', id: 'session_email',value: 'recruit@example.com' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label(:password,'パスワード')  %>
+        <%= f.password_field :password, class: 'form-control', id: 'session_password',value: 'password' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :remember_me, class: "checkbox" do %>
+          <%= f.check_box :remember_me %>
+          <span>ログインしたままにする</span>
+        <% end %>
+      </div>
+      <%= f.submit 'ログイン', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+<p class="text-center">＜採用担当者様 専用アカウント＞</p>
+<p class="text-center">メールアドレス：sample@example.com</p>
+<p class="text-center">パスワード：foobar</p>
+<p class="text-center">※フォームに予め入力済</p>

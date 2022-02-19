@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get    :login,     to: 'sessions#new'
   post   :login,     to: 'sessions#create'
+  get    :recruit,   to: 'sessions#recruit'
   delete :logout,    to: 'sessions#destroy'
   get :signup,       to: 'users#new'
   get :user_search, to: 'users#search'
