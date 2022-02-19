@@ -2,6 +2,13 @@ Dir.glob(File.join(Rails.root, 'db', 'seeds', '*.rb')) do |file|
   load(file)
 end
 
+User.create!(name: "採用 太郎",
+  email: "recruit@example.com",
+  password:              "password",
+  password_confirmation: "password",
+  activated: true,
+  activated_at: Time.zone.now)
+
 User.create!(name:  "山田 太郎",
   email: "sample@example.com",
   password:              "foobar",
@@ -25,7 +32,7 @@ end
 # マイクロポスト
 users = User.order(:created_at).take(6)
 50.times do
-  content = Faker::Lorem.sentence(word_count: 5)
+  content = "テスト投稿。"
   users.each { |user| user.tweets.create!(content: content) }
 end
 
@@ -47,7 +54,7 @@ rooms = DmRoom.all
 rooms.each_with_index do |a,i|
   DmEntrie.create!(user: user,dm_room: a)
   DmEntrie.create!(user: users[i+2],dm_room: a)
-  content = Faker::Lorem.sentence(word_count: 5)
+  content = "こんにちは！"
   DmMessage.create!(user: user,dm_room: a,message: content)
   DmMessage.create!(user: users[i+2],dm_room: a,message: content)
 end
@@ -67,7 +74,7 @@ users = User.all[2..15]
 user = User.first
 company.each do |c|
   areas.each do |a|
-    content = Faker::Lorem.sentence(word_count: 5)
+    content = "初めまして！"
     room = ChatRoom.create!(company: c,area: a)
     ChatUser.create!(user: user,chat_room: room)
     user.chat_posts.create!(chat_room: room,message: content)
