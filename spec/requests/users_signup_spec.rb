@@ -17,14 +17,14 @@ RSpec.describe "ユーザー登録", type: :request do
                                            email: "user@example.com",
                                            password: "password",
                                            password_confirmation: "password" } }
-      }.to change(User, :count).by(1).and change{ ActionMailer::Base.deliveries.count }.by(1)
+      }.to change(User, :count).by(1).and change { ActionMailer::Base.deliveries.count }.by(1)
     end
     context "有効化の可否" do
       before do
         post users_path, params: { user: { name: "Example User",
-                                  email: "user@example.com",
-                                  password: "password",
-                                  password_confirmation: "password" }}
+                                           email: "user@example.com",
+                                           password: "password",
+                                           password_confirmation: "password" } }
       end
 
       it "ユーザー作成直後は有効化されていないこと" do

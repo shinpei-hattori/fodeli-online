@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    redirect_to root_url and return unless @user.activated?
+    redirect_to(root_url) && return unless @user.activated?
     @selected_status = params[:status]
     if @selected_status == "ツイート履歴"
       @tweets = Kaminari.paginate_array(@user.tweets).page(params[:page]).per(5)

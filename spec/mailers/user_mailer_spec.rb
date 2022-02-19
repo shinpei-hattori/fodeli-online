@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
-  let!(:user) { create(:user,name: "佐藤 健",email: "takeru@gmail.com") }
+  let!(:user) { create(:user, name: "佐藤 健", email: "takeru@gmail.com") }
 
   describe "アカウント有効化メール" do
     let(:mail) { UserMailer.account_activation(user) }
@@ -24,6 +24,7 @@ RSpec.describe UserMailer, type: :mailer do
 
   describe "パスワード再設定メール" do
     let(:mail) { UserMailer.password_reset(user) }
+
     before do
       user.reset_token = User.new_token
     end
@@ -41,5 +42,4 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.text_part.body.encoded).to match CGI.escape(user.email)
     end
   end
-
 end
