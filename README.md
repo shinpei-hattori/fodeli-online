@@ -9,7 +9,7 @@ https://fodelionline.site/
 ・**Ajax**を用いた非同期処理（フォロー/未フォロー、ツイートに対するいいね機能などの切り替え表示）  
 ・**Bootstrap**によるレスポンシブ対応  
 ・**Rubocop**を使用したコード規約に沿った開発  
-・**14 個**のモデルをそれぞれ関連付けて使用
+・**15 個**のモデルをそれぞれ関連付けて使用
 
 # DB 設計図
 ![db](https://user-images.githubusercontent.com/67412898/154822094-1a45725d-be69-4efc-911e-187c322533b3.png)
