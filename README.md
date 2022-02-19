@@ -17,47 +17,47 @@ https://fodelionline.site/
 
 # アプリケーションの機能
 
-・ユーザー登録機能
-<br>◦ ログイン機能
-<br>◦ ログイン情報の保持
-<br>◦ ユーザー情報編集機能
-<br>◦ プロフィール画像変更機能(carrierwave)
-<br>◦ 検索機能
-・ツイートの投稿機能
-<br>◦ 投稿一覧表示機能
-<br>◦ 投稿詳細表示機能
-<br>◦ 画像投稿機能(carrierwave)
-<br>◦ コメントの投稿と削除機能
-<br>◦ いいね機能(Ajax)
-<br>◦ 検索機能
-・ページネーション機能(Kaminari)
-・オープンチャット機能
-<br>◦ コメントの投稿と削除機能
-<br>◦ 地域別絞り込み機能
-・個人チャット機能
-<br>◦ コメントの投稿と削除機能
-・DB テーブルのリレーション管理
-・DB トランザクション制御機能
-・通知機能(フォロワーがツイートした時など)
-・フォロー機能(Ajax)
-・単体テスト機能(Rspec)
-・統合テスト機能(Rspec)
++ ユーザー登録機能  
+■ ログイン機能  
+■ ログイン情報の保持  
+■ ユーザー情報編集機能  
+■ プロフィール画像変更機能(carrierwave)  
+■ 検索機能  
++ ツイートの投稿機能  
+■ 投稿一覧表示機能  
+■ 投稿詳細表示機能  
+■ 画像投稿機能(carrierwave)  
+■ コメントの投稿と削除機能  
+■ いいね機能(Ajax)  
+■ 検索機能  
++ ページネーション機能(Kaminari)  
++ オープンチャット機能  
+■ コメントの投稿と削除機能  
+■ 地域別絞り込み機能  
++ 個人チャット機能  
+■ コメントの投稿と削除機能  
++ DB テーブルのリレーション管理  
++ DB トランザクション制御機能  
++ 通知機能(フォロワーがツイートした時など)  
++ フォロー機能(Ajax) 
++ 単体テスト機能(Rspec)  
++ 統合テスト機能(Rspec)  
 
 # 使用技術
 
-・Ruby 2.5.7
-・Ruby on Rails 5.2.3
-・PostgreSQL 11.14
-・Nginx
-・Puma
-・Docker/Docker-compose
-・Rspec
-・Bootstrap
-・Rubocop
-・AWS
-<br>◦VPC
-<br>◦EC2
-<br>◦RDS
-<br>◦Route53
-<br>◦ALB
-<br>◦SES
++ Ruby 2.5.7  
++ Ruby on Rails 5.2.3  
++ PostgreSQL 11.14  
++ Nginx  
++ Puma  
++ Docker/Docker-compose  
++ Rspec  
++ Bootstra  
++ Rubocop  
++ AWS  
+■ VPC  
+■ EC2  
+■ RDS  
+■ Route53  
+■ ALB  
+■ SES
