@@ -53,3 +53,6 @@ Airbnb/DefaultScope:
 
 Airbnb/RiskyActiverecordInvocation:
   Enabled: false
+
+Airbnb/SimpleUnless:
+  Enabled: false

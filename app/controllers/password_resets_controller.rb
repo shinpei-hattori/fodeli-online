@@ -25,14 +25,14 @@ class PasswordResetsController < ApplicationController
     if params[:user][:password].empty?                  # (3) への対応
       @user.errors.add(:password, :blank)
       flash[:danger] = @user.errors.full_messages
-      redirect_to edit_password_reset_url(params[:id],email: params[:email])
+      redirect_to edit_password_reset_url(params[:id], email: params[:email])
     elsif @user.update_attributes(user_params)          # (4) への対応
       log_in @user
       flash[:success] = "パスワードを更新しました！"
       redirect_to @user
     else
       flash[:danger] = @user.errors.full_messages
-      redirect_to edit_password_reset_url(params[:id],email: params[:email])  # (2) への対応
+      redirect_to edit_password_reset_url(params[:id], email: params[:email]) # (2) への対応
     end
   end
 
@@ -48,8 +48,8 @@ class PasswordResetsController < ApplicationController
 
     # 正しいユーザーかどうか確認する
     def valid_user
-      unless (@user && @user.activated? &&
-              @user.authenticated?(:reset, params[:id]))
+      unless @user && @user.activated? &&
+              @user.authenticated?(:reset, params[:id])
         flash[:danger] = "認証に失敗しました。再度パスワード再設定を申請してください。"
         redirect_to new_password_reset_path
       end
