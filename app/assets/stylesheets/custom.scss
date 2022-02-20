@@ -631,6 +631,12 @@ input {
   font-size: 2.5em;
 }
 
+@media screen and (max-width: 768px) {
+  .home-head {
+    font-size: 2em;
+  }
+}
+
 .home-head-group {
   border: 5px solid #c9e5e6;
   border-radius: 16px;

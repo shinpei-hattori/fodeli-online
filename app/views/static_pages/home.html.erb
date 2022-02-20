@@ -14,7 +14,7 @@
       </aside>
       <div class="col-lg-8">
           <div class="row">
-            <%= form_with url: tweet_search_path, method: :get, class: "form-inline d-block text-right col-xl-12  mt-4 mt-lg-0", local: true do |f| %>
+            <%= form_with url: tweet_search_path, method: :get, class: "form-inline d-block text-right col-xl-12  mt-4 mt-lg-0 mb-4", local: true do |f| %>
               <input class="form-control m-0 mr-1" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword">
               <button class="btn search-btn mt-2 m-md-0" type="submit">Search</button>
             <% end %>
